@@ -1,0 +1,14 @@
+<flow xmlns='http://www.springframework.org/schema/webflow' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.springframework.org/schema/webflow 
+ http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd'>
+  <view-state id='invoiceData'>
+    <transition on='next' to='products' />
+  </view-state>
+  <view-state id='products'>
+    <transition on='add' to='products' />
+    <transition on='next' to='delivery' />
+  </view-state>
+  <view-state id='delivery'>
+    <transition on='finish' to='end' />
+  </view-state>
+  <end-state id='end' />
+</flow>

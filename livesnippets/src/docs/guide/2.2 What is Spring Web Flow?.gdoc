@@ -1,0 +1,15 @@
+The demo application contains a simple domain model for representing software projects. A project has a lead developer,
+a development team and user stories.
+
+!projectClassDiagram.png!
+
+A webflow wizard leads the user through the creation of a new project.
+
+The application demonstrates the use of webflow in combination with
+* subflows
+* subflow input/output
+* ajax
+* data binding and validation
+* using flow output in non-webflow controller actions
+
+The main flow looks as follows:

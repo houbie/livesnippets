@@ -1,0 +1,31 @@
+<flow xmlns='http://www.springframework.org/schema/webflow' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.springframework.org/schema/webflow 
+ http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd'>
+  <view-state id='projectInfo'>
+    <transition on='next' to='lead' />
+  </view-state>
+  <subflow-state id='lead'>
+    <transition on='selected' to='lead' />
+    <transition on='selected' to='team' />
+    <transition on='cancel' to='lead' />
+  </subflow-state>
+  <view-state id='team'>
+    <transition on='add' to='addTeamMember' />
+    <transition on='remove' to='team' />
+    <transition on='next' to='stories' />
+  </view-state>
+  <subflow-state id='addTeamMember'>
+    <transition on='selected' to='team' />
+    <transition on='cancel' to='team' />
+  </subflow-state>
+  <view-state id='stories'>
+    <transition on='addAjax' to='stories' />
+    <transition on='removeAjax' to='stories' />
+    <transition on='finish' to='saveProject' />
+  </view-state>
+  <action-state id='saveProject'>
+    <transition on='end' to='end' />
+      <transition to="projectInfo" on=""/>
+  </action-state>
+  <end-state id='end' />
+  <end-state id='cancel' />
+</flow>
