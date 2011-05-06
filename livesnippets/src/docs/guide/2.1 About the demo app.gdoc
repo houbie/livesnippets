@@ -1,17 +1,16 @@
-From the Spring Web Flow reference guide:
-'A flow encapsulates a reusable sequence of steps that can execute in different contexts.'
-...
-'In Spring Web Flow, a flow consists of a series of steps called "states".
-Entering a state typically results in a view being displayed to the user.
-On that view, user events occur that are handled by the state.
-These events can trigger transitions to other states which result in view navigations.'
+The "webflow demo application":../../project contains a simple domain model for representing software projects. A project has a lead developer,
+a development team and user stories.
 
-Basically, one uses webflow to build wizards and wizard like page flows. In traditional webflow, flows are defined with (verbose) XML.
+!projectClassDiagram.png!
 
-Webflow tries to solve some typical problems encountered when building wizards:
-* flow management: webflow lets you declare all possible states and transitions
-* scope management: each flow has its own scope for storing variables. This prevents the typical conflicts encountered when using the HTTP session
-* state management: webflow keeps track of the flow's states and can restore previous states
-* back button navigation: when a user navigates back, the previous flow sate is automatically restored.
-After completion of a flow, the user cannot navigate back anymore, preventing double commits and inconsistent state
+A wizard leads the user through the creation of a new project.
 
+!newProjectWizardFlow.png!
+
+The application demonstrates the use of webflow in combination with
+* subflows
+* subflow input/output
+* ajax
+* data binding and validation
+* using flow output in non-webflow controller actions
+* testing flows

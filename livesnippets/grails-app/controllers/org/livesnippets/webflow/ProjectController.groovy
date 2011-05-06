@@ -29,7 +29,14 @@ class ProjectController {
             subflow(controller: 'developer', action: 'getDeveloper', input: [experience: Experience.SENIOR, title: 'Select project lead'])
             on('selected') {
                 flow.projectInstance.lead = currentEvent.attributes.developer
-            }.to(selectLeadOrTeam)
+            }.to {
+                if (!flow.projectInstance.validate(['lead'])) {
+                    flash.message = 'invalid lead'
+                    return 'lead'
+                } else {
+                    return 'team'
+                }
+            }
             on('cancel') {
                 flash.message = 'Lead is mandatory!'
             }.to('lead')
@@ -91,12 +98,112 @@ class ProjectController {
         }
     }
 
+
+
+    def newProjectWizardCleanedUpFlow = {
+        onStart doOnStart
+
+        projectInfo {
+            on('next', doBindProjectInfo).to('lead')
+        }
+
+        lead {
+            subflow(controller: 'developer', action: 'getDeveloper', input: [experience: Experience.SENIOR, title: 'Select project lead'])
+            on('selected', doSetLead).to(selectLeadOrTeam)
+            on('cancel', doFlashLeadMandatoryMessage).to('lead')
+        }
+
+        team {
+            on('add').to('addTeamMember')
+            on('remove', doRemoveTeamMember).to('team')
+            on('next').to('stories')
+        }
+
+        addTeamMember {
+            subflow(controller: 'developer', action: 'getDeveloper', input: [title: 'Select team member'])
+            on('selected', doAddTeamMember).to('team')
+            on('cancel').to('team')
+        }
+
+        stories {
+            on('addAjax', doAddStory).to('stories')
+            on('removeAjax', doRemoveStory).to('stories')
+            on('finish').to('saveProject')
+        }
+        saveProject {
+            action(doSaveProject)
+            on('end').to('end')
+            on('projectInfo').to('projectInfo')
+        }
+
+        end {
+            redirect(action: 'show', id: flow.projectInstance.id)
+        }
+        cancel {
+            redirect(action: 'list')
+        }
+    }
+
+    private def doOnStart = {
+        flow.projectInstance = new Project()
+    }
+
     private def selectLeadOrTeam = {
         if (!flow.projectInstance.validate(['lead'])) {
             flash.message = 'invalid lead'
             return 'lead'
         } else {
             return 'team'
+        }
+    }
+
+    private def doBindProjectInfo = {
+        flow.projectInstance.properties = params
+        if (!flow.projectInstance.validate(['name', 'description'])) {
+            error()
+        }
+    }
+
+    private def doSetLead = {
+        flow.projectInstance.lead = currentEvent.attributes.developer
+    }
+
+    private def doFlashLeadMandatoryMessage = {
+        flash.message = 'Lead is mandatory!'
+    }
+
+    private def doRemoveTeamMember = {
+        flow.projectInstance.removeFromTeam(flow.projectInstance.team.find {it.name == params.name})
+    }
+
+    private def doAddTeamMember = {
+        flow.projectInstance.addToTeam(currentEvent.attributes.developer)
+    }
+
+    private def doAddStory = {
+        UserStory userStoryInstance = new UserStory()
+        userStoryInstance.properties = params
+        if (userStoryInstance.validate()) {
+            flow.projectInstance.addToStories(userStoryInstance)
+            userStoryInstance = null
+        }
+        render(template: "newProjectWizard/editStories", model: [projectInstance: flow.projectInstance, userStoryInstance: userStoryInstance])
+    }
+
+    private def doRemoveStory = {
+        flow.projectInstance.removeFromStories(flow.projectInstance.stories.find {it.name == params.name})
+        render(template: "newProjectWizard/editStories", model: [projectInstance: flow.projectInstance])
+    }
+
+    private def doSaveProject = {
+        if (!flow.projectInstance.lead.id) {
+            flow.projectInstance.lead.save()
+        }
+        if (flow.projectInstance.save()) {
+            RequestContextHolder.currentRequestAttributes().flashScope.message = "Project was successfully created"
+            end()
+        } else {
+            projectInfo()
         }
     }
 

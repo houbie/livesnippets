@@ -6,29 +6,30 @@ grails.project.docs.output.dir = "web-app/docs"
 grails.compile.artefacts.closures.convert = false
 
 grails.project.dependency.resolution = {
-    // inherit Grails' default dependencies
-    inherits("global") {
-        // uncomment to disable ehcache
-        // excludes 'ehcache'
-    }
+    inherits("global")
+
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+
     repositories {
         grailsPlugins()
         grailsHome()
         grailsCentral()
         mavenLocal()
         mavenCentral()
+        ebr()
     }
+
     dependencies {
-        compile 'org.grails:grails-radeox:1.0-b4'
     }
 
     plugins {
-        compile(':webflow:1.4.0.BUILD-SNAPSHOT')
-        compile(':hibernate:1.4.0.BUILD-SNAPSHOT')
-        compile(':jquery:1.4.4.1')
-        provided(':tomcat:1.4.0.BUILD-SNAPSHOT')
+        compile(':extended-validation:1.0.4')
+        compile(":webflow:$grailsVersion")
+        compile(":hibernate:$grailsVersion")
+        compile(":jquery:1.5.2")
+        build(":tomcat:$grailsVersion")
+        build(':cloud-foundry:1.0.0.M3')
     }
-
-    grails.plugin.location.'docs'="../docs"
 }
+
+grails.plugin.location.'docs' = "../docs"
