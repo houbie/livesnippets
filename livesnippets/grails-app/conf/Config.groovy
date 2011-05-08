@@ -88,6 +88,8 @@ log4j = {
 
     warn   'org.mortbay.log'
 
+    info   'grails.app'
+
 }
 
 grails.views.javascript.library="jquery"
@@ -99,5 +101,6 @@ grails{
         authors = 'Ivo Houbrechts'
         footer = 'Sponsored by <a href="http://www.ixor.be">Ixor</a>'
         images = new File('./src/docs/images')
+        css = new File('./src/docs/css')
     }
 }

@@ -10,7 +10,7 @@ Basically, one uses webflow to build wizards and wizard like page flows. In trad
 
 Webflow tries to solve some typical problems encountered when building wizards:
 * flow management: webflow lets you declare all possible states and transitions
-* scope management: each flow has its own scope for storing variables. This prevents the typical conflicts encountered when using the HTTP session
+* scope management: each flow has its own scope for storing variables. This prevents the typical conflicts encountered when storing objects in the HTTP session.
 * state management: webflow keeps track of the flow's states and can restore previous states
 * back button navigation: when a user navigates back, the previous flow sate is automatically restored.
 After completion of a flow, the user cannot navigate back anymore, preventing double commits and inconsistent state

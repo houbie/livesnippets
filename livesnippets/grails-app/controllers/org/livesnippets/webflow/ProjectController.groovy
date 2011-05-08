@@ -13,7 +13,11 @@ class ProjectController {
 
     def newProjectWizardFlow = {
         onStart {
+            log.info('starting a new project wizard')
             flow.projectInstance = new Project()
+        }
+        onEnd {
+            log.info('project wizard finished')
         }
 
         projectInfo {
@@ -26,7 +30,7 @@ class ProjectController {
         }
 
         lead {
-            subflow(controller: 'developer', action: 'getDeveloper', input: [experience: Experience.SENIOR, title: 'Select project lead'])
+            subflow(controller: 'developer', action: 'getDeveloper', input: [experience: Experience.SENIOR, title: 'New project wizard: Select project lead'])
             on('selected') {
                 flow.projectInstance.lead = currentEvent.attributes.developer
             }.to {
@@ -51,7 +55,7 @@ class ProjectController {
         }
 
         addTeamMember {
-            subflow(controller: 'developer', action: 'getDeveloper', input: [title: 'Select team member'])
+            subflow(controller: 'developer', action: 'getDeveloper', input: [title: 'New project wizard: Select team member'])
             on('selected') {
                 flow.projectInstance.addToTeam(currentEvent.attributes.developer)
             }.to('team')
@@ -96,6 +100,7 @@ class ProjectController {
         cancel {
             redirect(action: 'list')
         }
+
     }
 
 

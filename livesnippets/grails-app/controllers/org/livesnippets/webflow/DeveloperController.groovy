@@ -19,8 +19,15 @@ class DeveloperController {
                     [developerInstanceList: Developer.list(params), developerInstanceTotal: Developer.count()]
                 }
             }
+            onExit {
+                log.info('leaving search state')
+            }
+            onRender {
+                log.info("about to render search page, the model is already build: developerInstanceList ${flow.developerInstanceList}")
+            }
+
             on('select') {
-                request.developer = Developer.get(params.id)
+                [developer: Developer.get(params.id)]
             }.to('selected')
             on('cancel').to('cancel')
             on('create').to('createDeveloper')
@@ -41,7 +48,7 @@ class DeveloperController {
 
         selected {
             output {
-                developer {request.developer}
+                developer {flow.developer}
             }
         }
         cancel()

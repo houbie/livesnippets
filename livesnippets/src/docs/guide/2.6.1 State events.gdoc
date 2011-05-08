@@ -1,0 +1,11 @@
+View states provide hooks for 3 events:
+# onEntry: a code block that is executed when the state is entered
+# onRender: a code block that is executed just before the view is rendered
+# onExit: a code block that is executed when the state is left
+
+{groovySrc:class=DeveloperController|from=search|inline=true}
+{groovySrc}
+
+Notice how the @onEntry@ action returns a model.
+Just like transition actions, @onEntry@, @onRender@ and @onExit@ actions can return a model that will be merged in the flow scope
+so that it can be used in the next state or view.

@@ -7,6 +7,9 @@ eventRefDocStart = { DocPublisher publisher ->
     def controllerSourceMacro = classLoader.loadClass('grails.doc.macros.ControllerSourceMacro').newInstance(getAllDirs('grails-app/controllers'))
     publisher.registerMacro(controllerSourceMacro)
 
+    def gspSourceMacro = classLoader.loadClass('grails.doc.macros.GspSourceMacro').newInstance(getAllDirs('grails-app/views'))
+    publisher.registerMacro(gspSourceMacro)
+
     def allSrcDirs = getAllDirs('grails-app') + getAllDirs('scripts') + getAllDirs('src') + getAllDirs('test')
     def groovySourceMacro = classLoader.loadClass('grails.doc.macros.GroovySourceMacro').newInstance(allSrcDirs)
     publisher.registerMacro(groovySourceMacro)

@@ -25,6 +25,7 @@ Brief summary/description of the plugin.
 
     def onChange = { event ->
         println "generating docs"
+        //TODO: how can we call a grails script
         "grails docs".execute()
     }
 }

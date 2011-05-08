@@ -1,0 +1,22 @@
+Action states don't render a view but only execute a block of code that will determine what the next state will be.
+The first line of an action state is a call to @action@ with a closure as only argument:
+{groovySrc:class=ProjectController|from=saveProject|inline=true}
+{groovySrc}
+
+Notice how the action triggers events by invoking the event name as a function call.
+
+If no event was explicit triggered, an implicit @success@ event will be triggered, or the implicit @exception@ event if
+the action throws an exception.
+
+Just like transition actions, an action state can also return a model that will be merged in the flow scope so that it can be used in the next state or view:
+{code}
+saveProject {
+    action {
+        def project= projectService.save(flow.projectInstance)
+        return [project: project]
+    }
+    on('success').to('end')
+    on('ValidationException').to('retry')
+    on('Exception').to('fatalError')
+}
+{code}
