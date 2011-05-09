@@ -1,0 +1,15 @@
+The "extended validation demo application":../../order contains a simple domain model for representing customer orders.
+A order has a customer and multiple order lines. Each order line contains a product and a delivery address.
+
+!orderClassDiagram.png!
+
+A wizard leads the user through the creation of a new order.
+
+!orderIntakeFlow.png!
+
+The application demonstrates the use of the extended validation plugin in combination with webflow for:
+* constraint groups
+* cascaded validation
+* instance validators
+* partial validation
+* errors that survive serialization/de-serialization

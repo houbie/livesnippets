@@ -4,7 +4,7 @@ End states are states that don't have a body (a method call without arguments)
 {groovySrc:class=DeveloperController|from=cancel|lines=1|inline=true}
 {groovySrc}
 
-or states that only contain a @redirect@ call or [flow output|guide:2.4.4.2 Subflow input and output]:
+or states that only contain a @redirect@ call or [flow output|guide:2.4.4.3 Subflow output]:
 {groovySrc:class=ProjectController|from=end \{|inline=true}
 {groovySrc}
 

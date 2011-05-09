@@ -1,0 +1,5 @@
+A flow can embed an another flow as part of itself. On the other hand a flow can be split up into smaller (reusable) flows.
+This is comparable with methods that call other methods or are refactored into smaller methods.
+
+In webflow, this behavior is achieved with subflow states. When a flow is started as a subflow, it will have its own flow scope
+separate from the calling flow (cf. local variables in methods).

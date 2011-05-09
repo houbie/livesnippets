@@ -1,8 +1,5 @@
-A flow can reuse an another existing flow as part of its own. On the other hand a flow can be split up into smaller (reusable) flows.
-This is comparable with methods that call other methods or are refactored into smaller methods. In webflow, this is achieved with subflow states.
-
 In the project demo, there is a simple flow for the selection or creation of a developer. This flow is used in the newProjectWizard flow
-for both the selection of the lead developer
+for both the selection of the lead developer...
 
 {groovySrc:class=ProjectController|from=lead|inline=true}
 {groovySrc}

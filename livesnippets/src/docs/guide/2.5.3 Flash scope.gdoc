@@ -1,20 +1,8 @@
-A flow can reuse an another existing flow as part of its own. On the other hand a flow can be split up into smaller (reusable) flows.
-This is comparable with methods that call other methods or are refactored into smaller methods. In webflow, this is achieved with subflow states.
+Webflow defines its own flash scope. Although it has the same semantics as the standard grails flash scope (the main purpose
+is to store objects only until after the next request), it is a different scope. This means that objects stored in webflow's
+flash scope are not visible in standard grails actions.
 
-In the project demo, there is a simple flow for the selection or creation of a developer. This flow is used in the newProjectWizard flow
-for both the selection of the lead developer
-
-{groovySrc:class=ProjectController|from=lead|inline=true}
-{groovySrc}
-
-and for adding team members
-{groovySrc:class=ProjectController|from=addTeamMember|inline=true}
-{groovySrc}
-
-As you can see, subflow states contain transitions just like view states and action states.
-The event that is actually triggered, is determined by the end state of the called subflow (getDeveloper flow):
-{groovySrc:class=DeveloperController|from=selected|lines=6|inline=true}
-{groovySrc}
-
-If the getDeveloper flow ends in the @selected@ state, then the @selected@ event will be triggered in the @lead@  and @addTeamMember@ subflow states,
-otherwise the @cancel@ event will be triggered.
+{note}
+Objects in flash scope are automatically moved to request scope upon transition between states. So you should omit the @flash@
+prefix when referencing these objects in a view in this case.
+{note}

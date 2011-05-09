@@ -1,0 +1,9 @@
+Controller actions can easily be chained together to build a flow, but following considerations need to be made:
+* Where to store the state?
+** On the client with hidden fields: not always practical and sometimes just impossible
+** In session scope: you'll have to clean the session at the end of the flow and even then can users mess it up with some back and forward navigation
+** Pushing everything forward using flash scope: you lose everything when using the browser back button
+* How to prevent users starting in the middle of the flow?
+** This can be prevented with controller interceptors and/or filters
+
+If your flow becomes more complex, or contains subflows, this solution tends to get messy rather fast.

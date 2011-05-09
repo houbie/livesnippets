@@ -1,6 +1,6 @@
-A flow provides two hooks :
+A flow provides two event hooks:
 # onStart: a code block that is executed when the state is entered
 # onEnd: a code block that is executed just before the view is rendered
 
-{groovySrc:class=ProjectController|from=newProjectWizardFlow|lines=8|inline=true}
+{groovySrc:class=ProjectController|from=def newProjectWizardFlow|lines=8|inline=true}
 {groovySrc}

@@ -1,0 +1,28 @@
+webflow has the same possibilities as controller actions for data binding:
+
+* domain class data binding
+{groovySrc:class=ProjectController|from=flow.projectInstance.properties|lines=1|inline=true}
+{groovySrc}
+
+* explicit call to @bindData@
+{code}
+bindData(flow.projectInstance, params)
+{code}
+
+* command objects that are automatically instantiated and populated
+{code}
+on("next") {Project project ->
+    assert project.name ==  params.name
+}.to("lead")
+{code}
+
+After the data binding we can do the validation. If validation fails, we can stay in the same view state by triggering the
+build-in @error@ event. The same view will be rendered again for the user, with the invalid fields marked as errors.
+{groovySrc:class=ProjectController|from=on("next")|inline=true}
+{groovySrc}
+
+{note}
+When using the ValidationGrailsPlugin (validation for non-domain classes) in combination with webflow, errors are not always
+shown in the view. This happens when the object containing the errors is serialized and de-serialized by webflow.
+The [extended validation plugin|guide:3. Grails extended validation plugin] solves this problem.
+{note}

@@ -4,9 +4,9 @@ In its simplest form, a view state only contains trainsitions:
 
 {code}
 team {
-    on('add').to('addTeamMember')
-    on('remove') {...}.to('team')
-    on('next').to('stories')
+    on("add").to("addTeamMember")
+    on("remove") {...}.to("team")
+    on("next").to("stories")
 }
 {code}
 

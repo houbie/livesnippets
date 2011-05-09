@@ -15,8 +15,8 @@ saveProject {
         def project= projectService.save(flow.projectInstance)
         return [project: project]
     }
-    on('success').to('end')
-    on('ValidationException').to('retry')
-    on('Exception').to('fatalError')
+    on("success").to("end")
+    on("ValidationException").to("retry")
+    on("Exception").to("fatalError")
 }
 {code}

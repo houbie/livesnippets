@@ -1,0 +1,3 @@
+Constraints are defined as always with a @static constraints@ closure.
+
+Besides the standard grails constraints, cascade and instance constraints can be defined.

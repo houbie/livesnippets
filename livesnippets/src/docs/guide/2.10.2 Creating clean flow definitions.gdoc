@@ -1,0 +1,11 @@
+One of the nice features of grails webflow, compared to XML flow definitions, is that they can contain embedded logic.
+The disadvantage is that the readability of your flow definitions decreases quickly. You can keep your flow definitions
+clean by putting all the logic in named closures:
+{groovySrc:class=ProjectController|from=def newProjectWizardCleanedUpFlow|inline=true}
+{groovySrc}
+
+The closures are best declared as private members of the controller, otherwise they are considered to be controller actions:
+{groovySrc:class=ProjectController|from=private def doBindProjectInfo|inline=true}
+{groovySrc}
+
+The @do@ prefix is just a convention to distinguish flow actions from other actions and closures in the controller.

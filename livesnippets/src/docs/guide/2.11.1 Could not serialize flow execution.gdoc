@@ -1,0 +1,3 @@
+Every object that is stored in flow or conversation scope needs to implement @java.io.Serializable@. If this is not the case
+or if a serializable object has a non-transient field that references a non-serializable object, webflow will throw an exception.
+

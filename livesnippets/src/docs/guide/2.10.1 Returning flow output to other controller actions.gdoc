@@ -1,0 +1,6 @@
+Sometimes you want to pass the result of a finished flow on to another controller action. This could be done by storing the
+result in session scope, but there is a better, more scalable way: put the result in the standard grails flash scope when
+the flow is about to end:
+
+{groovySrc:class=ProjectController|from=RequestContextHolder|lines=1|inline=true}
+{groovySrc}

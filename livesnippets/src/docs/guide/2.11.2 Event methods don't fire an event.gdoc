@@ -1,0 +1,5 @@
+Calling an undefined method in f.e. an action state normally fires an event. If this is not the case, then typically the
+method is not undefined. F.e. calling @create()@ when scaffolding is turned on, will not fire the @create@ event but just
+calls the scaffolded @create@ action. You won't see any exceptions, but webflow simply fires the @error@ event.
+
+In general you should avoid names like @create@, @save@, @params@ etc. for events and states.

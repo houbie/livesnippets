@@ -1,0 +1,8 @@
+Most of the views of the project demo app were initially generated with @grails generate-views@.
+
+You typically need to do following with the generated views:
+# set the @action@ attribute in forms and links to the flow action
+# explicitly fill in the @controller@ attribute in forms and links when using subflows
+# add an @event@ attribute to links
+# remove the @flash@ prefix in @flash.message@
+# use @submitButton@ in stead of @actionSubmit@

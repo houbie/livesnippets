@@ -9,7 +9,7 @@ class UserStory implements Serializable {
 
     static constraints = {
         name(blank: false)
-        description(blank: true, nullable: true, widget: 'textarea')
+        description(blank: true, nullable: true, widget: "textarea")
         owner(blank: false)
     }
 }

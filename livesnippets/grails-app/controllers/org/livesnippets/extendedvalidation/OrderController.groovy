@@ -12,40 +12,40 @@ class OrderController {
         }
 
         invoiceData {
-            on('next') {
+            on("next") {
                 bindData(flow.order, params)
-                if (!flow.order.validate(groups: ['invoiceData'])) {
+                if (!flow.order.validate(groups: ["invoiceData"])) {
                     error()
                 }
-            }.to('products')
+            }.to("products")
         }
 
         products {
-            on('add') {
+            on("add") {
                 bindData(flow.order, params)
                 flow.order.orderLines << new OrderLine()
-            }.to('products')
-            on('next') {
+            }.to("products")
+            on("next") {
                 bindData(flow.order, params)
-                if (!flow.order.validate(includes: ['orderLines'], excludes: ['orderLines.deliveryAddress'])) {
+                if (!flow.order.validate(includes: ["orderLines"], excludes: ["orderLines.deliveryAddress"])) {
                     error()
                 }
-            }.to('delivery')
+            }.to("delivery")
         }
 
         delivery {
-            on('finish') {
+            on("finish") {
                 bindData(flow.order, params)
                 if (!flow.order.validate()) {
                     error()
                 } else {
                     RequestContextHolder.currentRequestAttributes().flashScope.newOrder = flow.order
                 }
-            }.to('end')
+            }.to("end")
         }
 
         end {
-            redirect(action: 'index')
+            redirect(action: "index")
         }
     }
 }

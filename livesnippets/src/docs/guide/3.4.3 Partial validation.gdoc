@@ -1,0 +1,31 @@
+Another feature that is missing in the @ValidationGrailsPlugin@, is partial validation with included and/or excluded fields.
+
+The @validate@ dynamic method of @Validateable@ classes accepts lists of included/excluded fields:
+
+{groovySrc:class=OrderController|from=if (!flow.order.validate(includes|lines=1|inline=true}
+{groovySrc}
+
+Only included fields that are not excluded, will be validated. If no includes is provided, all the fields that are not
+excluded will be validated.
+
+Notice how nested fields can be included or excluded.
+
+We can even go one step further by putting related constraints together in logical named groups. The following snippet shows
+how the @invoiceDate@ group is defined with two constraints:
+{groovySrc:class=Order|from=static|lines=5|inline=true}
+{groovySrc}
+
+No it is possible to validate only the constraints in one or more groups:
+{groovySrc:class=OrderController|from=if (!flow.order.validate(groups|lines=1|inline=true}
+{groovySrc}
+
+Groups are cascaded during validation. This means that cascade constraints, like @customer.name@, @customer.address@ etc. in the example, will only
+be validated if they are also declared to be in the same group:
+{groovySrc:class=Customer|from=static|inline=true}
+{groovySrc}
+
+It is possible to combine validation of groups with includes and excludes: the excluded fields are subtracted from the
+sum of the included fields and the group fields. You can find more examples in the tests of the extended validation plugin:
+{code}
+myDomain.validate(groups: ['group1', 'group2'], excludes: ['subDomain.subSubDomain.subMinInt'])
+{code}

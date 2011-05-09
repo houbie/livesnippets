@@ -1,20 +1,8 @@
-A flow can reuse an another existing flow as part of its own. On the other hand a flow can be split up into smaller (reusable) flows.
-This is comparable with methods that call other methods or are refactored into smaller methods. In webflow, this is achieved with subflow states.
+Each flow execution has its own associated flow scope.
+If flows are compared with methods, than objects in flow scope are similar to method local variables; they are only
+visible within one flow execution and cannot be accessed from calling flows nor subflows.
 
-In the project demo, there is a simple flow for the selection or creation of a developer. This flow is used in the newProjectWizard flow
-for both the selection of the lead developer
-
-{groovySrc:class=ProjectController|from=lead|inline=true}
-{groovySrc}
-
-and for adding team members
-{groovySrc:class=ProjectController|from=addTeamMember|inline=true}
-{groovySrc}
-
-As you can see, subflow states contain transitions just like view states and action states.
-The event that is actually triggered, is determined by the end state of the called subflow (getDeveloper flow):
-{groovySrc:class=DeveloperController|from=selected|lines=6|inline=true}
-{groovySrc}
-
-If the getDeveloper flow ends in the @selected@ state, then the @selected@ event will be triggered in the @lead@  and @addTeamMember@ subflow states,
-otherwise the @cancel@ event will be triggered.
+{note}
+Objects in flow scope are automatically merged into the view model when rendering a view. So you should omit the @flow@
+prefix when referencing these objects in a view.
+{note}

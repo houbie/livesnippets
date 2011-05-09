@@ -1,0 +1,8 @@
+Cascade constraints are used to cascade validation from one object to a nested (aggregated) object. This makes it possible
+to validate a complete object tree with one @validate()@ call.
+
+Cascade constraints can be defined for fields that are themselves @Validateable@ and for maps and collections of
+@Validateable@ fields:
+
+{groovySrc:class=Order|from=static|lines=7|inline=true}
+{groovySrc}

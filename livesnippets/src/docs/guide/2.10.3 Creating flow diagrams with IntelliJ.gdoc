@@ -1,0 +1,11 @@
+The webflow demo project contains a script, GenerateXmlFlowDefinitions.groovy, that generates a skeleton XML flow definition
+for all flows in all controllers. IntelliJ can then generate a flow diagram from the XML.
+
+The script also interprets dynamic transitions if you use a closure named with the convention @selectXorYorZ@, where X, Y and Z
+are the possible target states. The newProjectWizard flow contains an example:
+{groovySrc:class=ProjectController|from=on("selected", doSetLead|lines=1|inline=true}
+{groovySrc}
+
+The resulting diagram can be useful documentation.
+
+!newProjectWizardFlow.png!

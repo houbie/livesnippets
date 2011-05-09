@@ -1,20 +1,15 @@
-A flow can reuse an another existing flow as part of its own. On the other hand a flow can be split up into smaller (reusable) flows.
-This is comparable with methods that call other methods or are refactored into smaller methods. In webflow, this is achieved with subflow states.
+Conversation scope is shared by a flow execution and all its (nested) subflows.
+When again comparing flows with methods, then objects in conversation scope are similar to class properties.
+This means that the same considerations need to be made when deciding to store an object in conversation scope or
+passing it as subflow input or output. If the semantic meaning is the same in the flow and all of its subflows, you can use conversation scope.
+Otherwise it is better to use [subflow input|guide:2.4.4.2 Subflow input] or [subflow output|guide:2.4.4.3 Subflow output].
 
-In the project demo, there is a simple flow for the selection or creation of a developer. This flow is used in the newProjectWizard flow
-for both the selection of the lead developer
+{note}
+If you are using a version of grails prior to 1.4.0, you can mimic subflow input and output by using flash scope to pass objects
+because flash scope is more 'local' than conversation scope.
+{note}
 
-{groovySrc:class=ProjectController|from=lead|inline=true}
-{groovySrc}
-
-and for adding team members
-{groovySrc:class=ProjectController|from=addTeamMember|inline=true}
-{groovySrc}
-
-As you can see, subflow states contain transitions just like view states and action states.
-The event that is actually triggered, is determined by the end state of the called subflow (getDeveloper flow):
-{groovySrc:class=DeveloperController|from=selected|lines=6|inline=true}
-{groovySrc}
-
-If the getDeveloper flow ends in the @selected@ state, then the @selected@ event will be triggered in the @lead@  and @addTeamMember@ subflow states,
-otherwise the @cancel@ event will be triggered.
+{note}
+Objects in conversation scope are automatically merged into the view model when rendering a view. So you should omit the @conversation@
+prefix when referencing these objects in a view.
+{note}

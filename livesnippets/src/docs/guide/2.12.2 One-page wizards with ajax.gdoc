@@ -1,0 +1,12 @@
+The trick here is that there is only one page and one controller action for each step in the flow.
+All the controller actions are ajax actions that in each step update the page content.
+
+The fact that there is only one page solves the back button problem. Users cannot end up in the middle of a flow and back
+and forward navigation is in complete control of the programmer.
+
+The possibilities for state saving are the same as before:
+* On the client with hidden fields or javascript/json objects: not always practical and sometimes just impossible
+* In session scope: you'll have to clean the session at the end and the beginning of the flow, because a user can leave in the middle of the flow and start a new one
+* Pushing everything back and forward using flash scope
+
+Subflows can be accomplished with overlays, but you'll end up writing a lot of comment in your code to keep things understandable.

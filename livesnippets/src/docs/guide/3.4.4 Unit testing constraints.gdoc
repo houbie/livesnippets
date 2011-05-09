@@ -1,0 +1,8 @@
+The constraints of @Validateable@ classes can easily be unit tested.
+You only have to attach the dynamic validation methods to the class under test:
+{groovySrc:class=OrderTests|from=protected|inline=true}
+{groovySrc}
+
+From then on you can test the constraints as usual:
+{groovySrc:class=OrderTests|from=void|lines=6|inline=true}
+{groovySrc}

@@ -6,7 +6,7 @@ import org.livesnippets.extendedvalidation.Customer.CreditScore
 class OrderTests extends GroovyTestCase {
 
     protected void setUp() {
-        super.setUp();
+        super.setUp()
 
         ValidationHelper.addValidationMethods(Order, null)
         ValidationHelper.addValidationMethods(Customer, null)

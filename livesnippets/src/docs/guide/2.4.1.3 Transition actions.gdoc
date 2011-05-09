@@ -1,5 +1,5 @@
 Events can simply trigger the transition to a new state:
-{groovySrc:class=ProjectController|from=on('add')|lines=1|inline=true}
+{groovySrc:class=ProjectController|from=on("add")|lines=1|inline=true}
 {groovySrc}
 
 Or they can execute a closure before the transition takes place:
@@ -10,9 +10,13 @@ Notice how calling @error()@ prevents the transition from happening. In this cas
 state and the @projectInfo@ view will be rendered again.
 
 Transition actions can return a model that will be merged into the fow scope:
-{groovySrc:class=DeveloperController|from=on('select')|lines=3|inline=true}
+{groovySrc:class=DeveloperController|from=on("select")|lines=3|inline=true}
 {groovySrc}
 
 This model can then be used in the next state:
 {groovySrc:class=DeveloperController|from=selected|inline=true}
+{groovySrc}
+
+Transitions can also be made dynamic by using a closure in stead of a string to define the destination state:
+{groovySrc:class=ProjectController|from=on("selected")|lines=10|inline=true}
 {groovySrc}

@@ -14,10 +14,10 @@ class Project implements Serializable {
 
     static constraints = {
         name(blank: false, unique: true)
-        description(blank: false, widget: 'textarea')
+        description(blank: false, widget: "textarea")
         lead(nullable: false, validator: {
             if (it.experience != Experience.SENIOR) {
-                return 'project.lead.experience'
+                return "project.lead.experience"
             }
         })
     }

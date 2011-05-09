@@ -1,0 +1,9 @@
+The extended validation plugin is similar to the build-in @ValidationGrailsPlugin@. It makes declarative constraints possible
+for classes that are not grails domain classes.
+
+The extra features of the extended validation plugin are:
+* constraint groups
+* cascaded validation
+* instance validators
+* partial validation
+* errors that survive serialization/de-serialization
