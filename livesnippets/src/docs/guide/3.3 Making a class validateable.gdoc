@@ -1,6 +1,6 @@
 There are two ways to make a class validateable:
 
-* Use the be.ixor.grails.extendedvalidation.Validateable annotation
+* Use the @be.ixor.grails.extendedvalidation.Validateable@ annotation
 {groovySrc:class=Address|from=@Validateable|lines=2|inline=true}
 {groovySrc}
 

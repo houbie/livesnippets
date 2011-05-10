@@ -1,4 +1,4 @@
-Prior to grails 1.3.5, subflow states needed to have the same name as the subflow they called, making flow not generally
+Prior to grails 1.3.5, subflow states needed to have the same name as the subflow they called. As a result (sub)flows were not generally
 reusable. As a side effect of the fix for this problem, the url that the user sees changes when a subflow is called.
 
 If the last state in a flow is a subflow state, then navigating back after such a flow completes, will navigate to the

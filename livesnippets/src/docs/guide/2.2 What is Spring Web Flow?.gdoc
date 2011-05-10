@@ -6,17 +6,16 @@ Entering a state typically results in a view being displayed to the user.
 On that view, user events occur that are handled by the state.
 These events can trigger transitions to other states which result in view navigations.'
 
-Basically, one uses webflow to build wizards and wizard like page flows. In traditional webflow, flows are defined with (verbose) XML.
+Basically, webflow is used to build wizards and wizard like page flows. In traditional webflow, flows are defined with (verbose) XML.
 
 Webflow tries to solve some typical problems encountered when building wizards:
-* flow management: webflow lets you declare all possible states and transitions
+* flow management: webflow lets you declare all the states and all allowed transitions from one state to another
 * scope management: each flow has its own scope for storing variables. This prevents the typical conflicts encountered when storing objects in the HTTP session.
 * state management: webflow keeps track of the flow's states and can restore previous states
 * back button navigation: when a user navigates back, the previous flow sate is automatically restored.
-After completion of a flow, the user cannot navigate back anymore, preventing double commits and inconsistent state
+After completion of a flow, the user cannot navigate back anymore. This prevents double commits and inconsistent states.
 
 Grails webflow doesn't expose all the features of Spring Web Flow.
-
 Some notable missing features are:
 * Flow inheritance
 * Global transitions

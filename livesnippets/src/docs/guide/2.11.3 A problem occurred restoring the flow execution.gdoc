@@ -1,4 +1,4 @@
-By default webflow will keep 30 states in a flows history and older states are discarded. This means that if a user navigates
+By default webflow will keep 30 states in flow execution history. Older states are discarded. This means that if a user navigates
 back 31 states, webflow throws an exception.
 
 In a 'normal' flow this shouldn'd be a problem, but it can become a problem with ajax actions because each ajax action

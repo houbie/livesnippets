@@ -24,4 +24,4 @@ class ProjectController {
 {code}
 
 One of the big advantages of grails webflow is that you are able to write code in a flow definition, thus interweaving
-flow definition code and flow execution code, something that is less powerfull and more cumbersome in an XML definnition.
+flow definition code and flow execution code. The logic in an XML definnition is less powerfull and more cumbersome.

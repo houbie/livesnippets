@@ -1,7 +1,7 @@
 View states provide hooks for 3 events:
-# onEntry: a code block that is executed when the state is entered
-# onRender: a code block that is executed just before the view is rendered
-# onExit: a code block that is executed when the state is left
+# onEntry: a closure that is executed when the state is entered
+# onRender: a closure that is executed just before the view is rendered
+# onExit: a closure that is executed when the state is left
 
 {groovySrc:class=DeveloperController|from=search|inline=true}
 {groovySrc}

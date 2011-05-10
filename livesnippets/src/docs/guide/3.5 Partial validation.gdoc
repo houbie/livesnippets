@@ -11,7 +11,7 @@ excluded will be validated.
 Notice how nested fields can be included or excluded.
 
 We can even go one step further by putting related constraints together in logical named groups. The following snippet shows
-how the @invoiceDate@ group is defined with two constraints:
+how the @invoiceData@ group is defined with two constraints:
 {groovySrc:class=Order|from=static|lines=5|inline=true}
 {groovySrc}
 

@@ -1,4 +1,4 @@
-Webflow can be combined nicely with ajax, but there is not a lot of documentation on about how to do it.
+Webflow supports ajax actions and partial view rendering, but there is not a lot of documentation on this subject.
 
 First of all, you define the ajax event as a transition from a view state to itself:
 {groovySrc:class=ProjectController|from=on("removeAjax")|inline=true}
@@ -6,7 +6,7 @@ First of all, you define the ajax event as a transition from a view state to its
 
 Notice the @render@ call to render the template containing the ajax response.
 
-The @Ajax@ suffix in the event names is just a self-documenting convention.
+The @Ajax@ suffix in the event name is just a self-documenting convention.
 
 You'll notice that triggering the ajax event with a simple @remoteLink@ will render a complete html page in stead of only the template.
 This is solved by adding @ajaxSource=true@ as query parameter to the link.
@@ -16,12 +16,12 @@ template contains a link, this link won't have a @execution@ query parameter and
 flow execution. This is again solved by adding the query parameter manualy.
 
 The resulting ajax link becomes:
-{gspSrc:view=_editStories|from=<td><g:remoteLink|lines=1|inline=true}
+{gspSrc:view=_editStories|from=<td><g:remoteLink|lines=2|inline=true}
 {gspSrc}
 
-@formRemote@s suffer from the same problems. Additionally @submitButton@s in a @formRemote@ don't get the correct event
+The @formRemote@ suffers from the same problems. Additionally, a @submitButton@ in a @formRemote@ doesn't get the correct event
 being post. This can again be solved by adding the correct query parameter:
-{gspSrc:view=_editStories|from=<g:formRemote|lines=1|inline=true}
+{gspSrc:view=_editStories|from=<g:formRemote|lines=2|inline=true}
 {gspSrc}
 
 If the @formRemote@ contains multiple @submitButton@s that need to post different events, the @_eventId@ can be put in a

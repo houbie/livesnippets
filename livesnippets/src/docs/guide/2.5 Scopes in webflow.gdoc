@@ -3,5 +3,5 @@ Webflow defines, besides page request and session scope, three special scopes:
 # conversation scope
 # flash scope
 
-In stead of keeping everything in the HTTP session, Webflow uses serialization to store flow states for scalability reasons.
-That is why Objects that are stored in flash, flow or conversation scope must implement @java.io.Serializable@, otherwise webflow will throw an exception.
+For scalability reasons, Webflow uses serialization to store flow states in stead of keeping everything in the HTTP session.
+That is why objects that are stored in flow or conversation scope must implement @java.io.Serializable@, otherwise webflow will throw an exception.

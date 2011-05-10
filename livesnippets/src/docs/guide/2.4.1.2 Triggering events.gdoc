@@ -1,7 +1,7 @@
 After the view is rendered, the user has to trigger an event to make the flow transition to the next state.
 
-User events can be triggered by clicking on a link:
-{gspSrc:view=team|from=<td><g:link|lines=1|inline=true}
+User events can be triggered by clicking on a link that contains an event attribute:
+{gspSrc:view=team|from=<td><g:link|lines=2|inline=true}
 {gspSrc}
 
 or by submitting a form:

@@ -3,13 +3,13 @@ Just like methods, subflows can define input arguments that will be put in its f
 {groovySrc}
 
 The values are provided in the calling flow:
-{groovySrc:class=ProjectController|from=subflow|lines=1|inline=true}
+{groovySrc:class=ProjectController|from=subflow|lines=2|inline=true}
 {groovySrc}
 
 If an input argument is marked as required then webflow will throw an exception if the calling flow does not provide a value.
 This implicates that a flow with required input arguments cannot be used standalone, but can only be called as subflow.
 
-Input arguments can have default values, either static (created at flow definition time) or dynamic (calculated at flow execution time).
+Input arguments can have default values, either constant (created at flow definition time) or dynamic (calculated at flow execution time).
 Dynamic default values need to be defined with a closure.
 
 The snippet below summarizes all possible ways to define input arguments.
@@ -22,7 +22,7 @@ def mySubFlow = {
         // required, the flow can only be started if bar is provided
         bar(required: true)
 
-        // the static default value will only once be assigned at flow definition time and will remain the same for all executions
+        // the constant default value will only once be assigned at flow definition time and will remain the same for all executions
         bazz(required: false, value: someValue)
 
         // same as bazz
@@ -37,11 +37,11 @@ def mySubFlow = {
     ...
 {code}
 
-The calling flow can also provide static or dynamic values for the input arguments:
+The calling flow can also provide constant or dynamic values for the input arguments:
 {code}
 subflow(action: "subber",
         input: [
-                 // the static value will only once be calculated at flow definition time and will remain the same for all calls
+                 // the constant value will only once be calculated at flow definition time and will remain the same for all calls
                  bar: someValue,
                  
                  // the dynamic value will be evaluated each time the subflow is called

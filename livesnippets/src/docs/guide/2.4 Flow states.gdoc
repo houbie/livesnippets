@@ -1,0 +1,7 @@
+There are five types of states that can be used in a flow:
+* view states: they render a view
+* action states: they contain coded logic
+* end states: they indicate that a flow has ended and optionally send a redirect
+* subflow states: they start another flow in the context of the current flow
+
+All types can be used as start state of a flow.

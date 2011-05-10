@@ -7,7 +7,7 @@ Or they can execute a closure before the transition takes place:
 {groovySrc}
 
 Notice how calling @error()@ prevents the transition from happening. In this case the flow will stay in the @projectInfo@
-state and the @projectInfo@ view will be rendered again.
+state and the @projectInfo@ view will be rendered again with error messages.
 
 Transition actions can return a model that will be merged into the fow scope:
 {groovySrc:class=DeveloperController|from=on("select")|lines=3|inline=true}

@@ -6,18 +6,18 @@ The calling flow  can retrieve the result from the @currentEvent.attributes@, th
 {groovySrc:class=ProjectController|from=on("selected")|inline=true}
 {groovySrc}
 
-Output values can be either static (created at flow definition time) or dynamic (calculated at flow execution time).
-Dynamic default values need to be defined with a closure.
+Output values can be either constant (created at flow definition time) or dynamic (calculated at flow execution time).
+Dynamic values need to be defined with a closure.
 
 The snippet below summarizes all possible ways to define flow output.
 {code}
 subflowEndState {
     output {
-        // the static value will only once be assigned at flow definition time and will remain the same for all executions
+        // the constant value will only once be assigned at flow definition time and will remain the same for all executions
         outX(value: someVariable)
 
-        // same as outY
-        outY( "some value know at flow definition time")
+        // same as outX
+        outY(someVariable)
 
         // the dynamic value will be evaluated each time the flow ends
         dynamicOut { params.x + flow.y }

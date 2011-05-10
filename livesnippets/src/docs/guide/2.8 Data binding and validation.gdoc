@@ -1,4 +1,4 @@
-webflow has the same possibilities as controller actions for data binding:
+Webflow has the same possibilities as controller actions for data binding:
 
 * domain class data binding
 {groovySrc:class=ProjectController|from=flow.projectInstance.properties|lines=1|inline=true}

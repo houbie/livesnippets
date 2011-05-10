@@ -1,13 +1,8 @@
 After validating an object tree, the validation errors are attached to the individual objects in the tree. Using the
 @renderErrors@ tag to show the errors of the root object of the tree, will only show field errors for that object.
-Fields with a cascade constraint will only have a @cascade.invalid@ error if the nested object failed to validate.
+Fields with a cascade constraint will have a @cascade.invalid@ error (if the nested object failed to validate).
 
 In our GSP's we usually want to show all nested errors. That is why @Validateable@ classes have a @getAllErrorsRecursive@
 dynamic method that can be used in a view:
 {gspSrc:view=invoiceData|from=14|lines=7|inline=true}
 {gspSrc}
-
-With the @ValidationGrailsPlugin@ in combination with flow scoped objects, it is possible that validation errors are not
-rendered after serialization/de-serialization of the objects. This is solved in the extended validation plugin by an ASTTransformation
-that is linked to the @Validateable@ annotation. The ASTTransformation adds a serializable error id to the objects for
-error retrieval.

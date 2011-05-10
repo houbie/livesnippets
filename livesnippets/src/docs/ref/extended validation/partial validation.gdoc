@@ -1,0 +1,3 @@
+{code}
+myDomain.validate(includes: [ranged, uniqueInCollection], groups: ['group1', 'group2'], excludes: ['subDomain.subSubDomain.subMinInt'])
+{code}
