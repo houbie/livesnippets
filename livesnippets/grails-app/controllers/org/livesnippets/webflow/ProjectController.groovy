@@ -78,6 +78,7 @@ class ProjectController {
                 render(template: "newProjectWizard/editStories", model: [projectInstance: flow.projectInstance])
             }.to("stories")
             on("finish").to("saveProject")
+            on("cancel").to("cancel")
         }
         saveProject {
             action {
@@ -98,9 +99,7 @@ class ProjectController {
         end {
             redirect(action: "show", id: flow.projectInstance.id)
         }
-        cancel {
-            redirect(action: "list")
-        }
+        cancel()
 
     }
 
@@ -136,6 +135,7 @@ class ProjectController {
             on("addAjax", doAddStory).to("stories")
             on("removeAjax", doRemoveStory).to("stories")
             on("finish").to("saveProject")
+            on("cancel").to("cancel")
         }
         saveProject {
             action(doSaveProject)

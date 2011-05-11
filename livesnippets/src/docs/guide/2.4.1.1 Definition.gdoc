@@ -10,7 +10,7 @@ team {
 }
 {code}
 
-The default view that will be rendered is @/controllerName/flowId/viewstate@ (@/project/newProjectWizard/team.gsp@ in the example).
+The default view that will be rendered is @/controllerName/flowName/viewstate@ (@/project/newProjectWizard/team.gsp@ in the example).
 
 The default view can be overridden with @render@:
 

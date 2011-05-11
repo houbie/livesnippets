@@ -15,6 +15,7 @@
 </div>
 <div>
     <g:link controller="project" action="newProjectWizard" event="finish">Finish</g:link>
+    <g:link controller="project" action="newProjectWizard" event="cancel">Cancel</g:link>
 </div>
 </body>
 </html>

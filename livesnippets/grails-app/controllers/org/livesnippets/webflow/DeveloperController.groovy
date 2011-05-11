@@ -41,7 +41,7 @@ class DeveloperController {
                 if (!developer.validate()) {
                     error()
                 } else {
-                    request.developer = developer
+                    [developer : developer]
                 }
             }.to("selected")
             on("cancel").to("cancel")

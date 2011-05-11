@@ -2,4 +2,8 @@ The goal of Live Snippets is to bring code snippets and documentation together i
 
 Live Snippets targets all Groovy and Grails related stuff.
 
+The source code is available on "github":https://github.com/houbie/livesnippets
+
+The application is currently deployed on "Cloud Foundry":http://livesnippets.cloudfoundry.com
+
 Enjoy!

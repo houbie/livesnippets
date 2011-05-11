@@ -4,6 +4,8 @@
     <transition on='next' to='lead' />
   </view-state>
   <subflow-state id='lead'>
+    <transition on='selected' to='lead' />
+    <transition on='selected' to='team' />
     <transition on='cancel' to='lead' />
   </subflow-state>
   <view-state id='team'>
@@ -23,7 +25,7 @@
   </view-state>
   <action-state id='saveProject'>
     <transition on='end' to='end' />
-    <transition on='projectInfo' to='projectInfo' />
+      <!--<transition to="projectInfo" on="projectInfo"/>-->
   </action-state>
   <end-state id='end' />
   <end-state id='cancel' />
