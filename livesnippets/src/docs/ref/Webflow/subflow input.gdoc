@@ -1,0 +1,37 @@
+h3. Defining input arguments
+
+{code}
+def mySubFlow = {
+    input {
+        // optional, no default value
+        foo()
+
+        // required, the flow can only be started if bar is provided
+        bar(required: true)
+
+        // the static default value will only once be assigned at flow definition time and will remain the same for all executions
+        bazz(required: false, value: someValue)
+
+        // same as bazz
+        bis( someValue)
+
+        // the dynamic value will be evaluated each time the flow starts
+        dynamic { flow.someProperty }
+
+        // the dynamic value will be evaluated each time the flow starts
+        dynamicBis (value: someClosure)
+    }
+    ...
+{code}
+
+h3. Providing input
+{code}
+subflow(action: "subber",
+        input: [
+                 // the static value will only once be calculated at flow definition time and will remain the same for all calls
+                 bar: someValue,
+
+                 // the dynamic value will be evaluated each time the subflow is called
+                 bazz: {flow.bizz}
+               ])
+{code}

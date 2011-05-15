@@ -1,0 +1,24 @@
+h3. Returning output
+{code}
+subflowEndState {
+    output {
+        // the static value will only once be assigned at flow definition time and will remain the same for all executions
+        outX(value: someVariable)
+
+        // same as outY
+        outY( "some value know at flow definition time")
+
+        // the dynamic value will be evaluated each time the flow ends
+        dynamicOut { params.x + flow.y }
+
+        // the dynamic value will be evaluated each time the flow ends
+        dynamicOut bis(value: someClosure)
+    }
+}
+...
+{code}
+
+h3. Retrieving output in calling subflow state
+{code}
+outX= currentEvent.attributes.outX
+{code}
