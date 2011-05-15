@@ -4,7 +4,7 @@
 <head>
     <meta name="layout" content="main">
     <g:set var="entityName" value="${message(code: 'project.label', default: 'Project')}" />
-    <title>New project wizard: canceled</title>
+    <title>Canceled</title>
 </head>
 <body>
 <a href="#list-project" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -15,6 +15,7 @@
         <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></li>
     </ul>
 </div>
-<h1>New project wizard: canceled</h1>
+<flow:breadCrumbs/>
+<h1>Canceled</h1>
 </body>
 </html>

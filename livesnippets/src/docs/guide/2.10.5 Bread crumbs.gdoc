@@ -1,0 +1,7 @@
+If you want to add bread crumbs to your wizard pages, just call the @breadcrumb@ tag:
+{gspSrc:view=projectInfo|from=<flow:|lines=1|inline=true}
+{gspSrc}
+
+This will render bread crumbs for every view state and subflow state. You will get a bread crumbs line for each active subflow.
+
+The bread crumb labels are resolved with the state id as key from the i18n messages and default to the state id.

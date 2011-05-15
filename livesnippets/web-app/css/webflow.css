@@ -1,0 +1,35 @@
+.breadCrumb {
+    position: relative;
+}
+
+.breadCrumb br {
+    clear: both;
+    float: none;
+}
+
+.breadCrumb ul {
+    display: block;
+    height: auto;
+    overflow: visible;
+    width: 100%;
+}
+
+.breadCrumb ul li {
+    color: gray;
+    float: left;
+    list-style: none;
+    border-right: 1px solid #CCC;
+    padding: 0 5px 0;
+}
+
+.breadCrumb ul li:last-child {
+    border-right: 0;
+}
+
+.breadCrumb ul li.active {
+    color: blue;
+}
+
+.breadCrumb li.active ul {
+    position: absolute;
+}

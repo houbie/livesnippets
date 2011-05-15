@@ -15,6 +15,7 @@
 			</ul>
 		</div>
 		<div id="list-developer" class="content scaffold-list" role="main">
+            <flow:breadCrumbs/>
             %{-- variable title from flow input --}%
 			<h1>${title}</h1>
             %{-- don't use flash.message !! --}%

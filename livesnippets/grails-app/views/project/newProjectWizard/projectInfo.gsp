@@ -4,7 +4,7 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'project.label', default: 'Project')}" />
-		<title>New project wizard: Project info</title>
+		<title>Project info</title>
 	</head>
 	<body>
 		<a href="#create-project" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -15,7 +15,8 @@
 			</ul>
 		</div>
 		<div id="create-project" class="content scaffold-create" role="main">
-			<h1>New project wizard: Project info</h1>
+            <flow:breadCrumbs/>
+			<h1>Project info</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>

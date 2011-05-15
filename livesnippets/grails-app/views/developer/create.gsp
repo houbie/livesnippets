@@ -17,6 +17,7 @@
 			</ul>
 		</div>
 		<div id="create-developer" class="content scaffold-create" role="main">
+            <flow:breadCrumbs/>
 			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
