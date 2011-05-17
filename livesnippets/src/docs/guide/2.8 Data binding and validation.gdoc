@@ -1,24 +1,24 @@
 Webflow has the same possibilities as controller actions for data binding:
 
 * domain class data binding
-{groovySrc:class=ProjectController|from=flow.projectInstance.properties|lines=1|inline=true}
+{groovySrc:class=ProjectController|from=flow.projectInstance.properties|lines=1}
 {groovySrc}
 
 * explicit call to @bindData@
-{code}
+{src}
 bindData(flow.projectInstance, params)
-{code}
+{src}
 
 * command objects that are automatically instantiated and populated
-{code}
+{src}
 on("next") {Project project ->
     assert project.name ==  params.name
 }.to("lead")
-{code}
+{src}
 
 After the data binding we can do the validation. If validation fails, we can stay in the same view state by triggering the
 build-in @error@ event. The same view will be rendered again for the user, with the invalid fields marked as errors.
-{groovySrc:class=ProjectController|from=on("next")|inline=true}
+{groovySrc:class=ProjectController|from=on("next")}
 {groovySrc}
 
 {note}

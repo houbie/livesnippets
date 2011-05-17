@@ -102,5 +102,7 @@ grails{
         footer = 'Sponsored by <a href="http://www.ixor.be">Ixor</a>'
         images = new File('./src/docs/images')
         css = new File('./src/docs/css')
+        js = new File('./src/docs/js')
+        style = new File('./src/docs/style')
     }
 }

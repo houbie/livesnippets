@@ -9,7 +9,7 @@ class GspSourceMacro extends SourceMacro {
 
     String getName() { 'gspSrc' }
 
-    String getCodeType(Map params) { 'xml' }
+    String getCodeType(Map params) { 'html' }
 
     String getFileName(Map params) {
         return "${getViewName(params)}.gsp"

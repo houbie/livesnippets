@@ -36,7 +36,7 @@ class ProjectController {
                 flow.projectInstance.lead = currentEvent.attributes.developer
             }.to {
                 if (!flow.projectInstance.validate(["lead"])) {
-                    flash.message = "invalid lead"
+                    flash.message = "The project lead has to be a senior developer"
                     return "lead"
                 } else {
                     return "team"

@@ -4,14 +4,14 @@ the same error gets displayed multiple times).
 
 An instance constraint does not have to be defined on a field. It only requires a (unique) declarative name:
 
-{groovySrc:class=Order|from=creditCheck|inline=true}
+{groovySrc:class=Order|from=creditCheck}
 {groovySrc}
 
 If you want to access the error object, just define a second argument in the validator closure:
-{code}
+{src}
 sortedCollection(validator: { myDomain, errors ->
     if (myDomain?.collection != myDomain?.collection?.clone()?.sort()) {
         errors.reject('unsorted')
     }
 })
-{code}
+{src}

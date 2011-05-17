@@ -3,7 +3,7 @@ View states provide hooks for 3 events:
 # onRender: a closure that is executed just before the view is rendered
 # onExit: a closure that is executed when the state is left
 
-{groovySrc:class=DeveloperController|from=search|inline=true}
+{groovySrc:class=DeveloperController|from=search}
 {groovySrc}
 
 Notice how the @onEntry@ action returns a model.

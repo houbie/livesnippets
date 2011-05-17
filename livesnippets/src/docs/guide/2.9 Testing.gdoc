@@ -2,7 +2,7 @@ Flows can be integration tested by extending the @WebFlowTestCase@.
 
 The @WebFlowTestCase@ needs to know which flow is being tested. This is done by implementing the abstract @getFlow@ method.
 
-{groovySrc:class=ProjectControllerTests|from=@Override|lines=4|inline=true}
+{groovySrc:class=ProjectControllerTests|from=@Override|lines=4}
 {groovySrc}
 
 Furthermore, all (nested) subflows that can be called from the flow under test, need to be registered in the order that
@@ -15,11 +15,11 @@ The @registerFlow@ takes two arguments:
 There are two options for the flow definition.
 
 Use the 'real' definition
-{groovySrc:class=ProjectControllerTests|from=registerFlow|lines=1|inline=true}
+{groovySrc:class=ProjectControllerTests|from=registerFlow|lines=1}
 {groovySrc}
 
 ... or provide a (simplified) mock flow:
-{code}
+{src}
 registerFlow("developer/getDeveloper") {
     start{
         action{}
@@ -27,20 +27,20 @@ registerFlow("developer/getDeveloper") {
     }
     cancel()
 }
-{code}
+{src}
 This has the advantage that the tests don't have to walk trough all the steps of the subflow and can concentrate on the
 flow under test.
 
 After the flow is started with @startFlow@, events can be fired with @signalEvent@.
-{groovySrc:class=ProjectControllerTests|from=void testRequiredFields|inline=true}
+{groovySrc:class=ProjectControllerTests|from=void testRequiredFields}
 {groovySrc}
 
 Notice how all the webflow scopes like @flowScope@ are made available in the test. The active @flowExecution@ is also accessible.
 
 Request parameters can be simulated by just setting them on the controller:
-{groovySrc:class=ProjectControllerTests|from=controller|lines=2|inline=true}
+{groovySrc:class=ProjectControllerTests|from=controller|lines=2}
 {groovySrc}
 
 The complete test then becomes:
-{groovySrc:class=ProjectControllerTests|from=class|inline=true}
+{groovySrc:class=ProjectControllerTests|from=class}
 {groovySrc}

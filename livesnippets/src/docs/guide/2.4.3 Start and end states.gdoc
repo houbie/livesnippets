@@ -1,11 +1,11 @@
 The start state is simply the first state in the flow definition (the @projectInfo@ state in the newProjectWizard flow)
 
 End states are states that don't have a body (a method call without arguments)
-{groovySrc:class=DeveloperController|from=cancel|lines=1|inline=true}
+{groovySrc:class=DeveloperController|from=cancel|lines=1}
 {groovySrc}
 
 or states that only contain a @redirect@ call or [flow output|guide:2.4.4.3 Subflow output]:
-{groovySrc:class=ProjectController|from=end \{|inline=true}
+{groovySrc:class=ProjectController|from=end \{}
 {groovySrc}
 
 {note}

@@ -1,7 +1,7 @@
 There are two ways to make a class validateable:
 
 * Use the @be.ixor.grails.extendedvalidation.Validateable@ annotation
-{groovySrc:class=Address|from=@Validateable|lines=2|inline=true}
+{groovySrc:class=Address|from=@Validateable|lines=2}
 {groovySrc}
 
 {note}
@@ -10,9 +10,9 @@ Otherwise they will not be picked up by Spring.
 {note}
 
 * Add the class to grails.extendedvalidation.classes in Config.groovy
-{code}
+{src}
 grails.extendedvalidation.classes = [Order, Customer, Address]
-{code}
+{src}
 
 {note}
 Classes that are listed in Config.groovy will not preserve errors after serialization / de-serialization.

@@ -2,17 +2,17 @@ When a flow enters a view state, the corresponding view is rendered.
 
 In its simplest form, a view state only contains trainsitions:
 
-{code}
+{src}
 team {
     on("add").to("addTeamMember")
     on("remove") {...}.to("team")
     on("next").to("stories")
 }
-{code}
+{src}
 
 The default view that will be rendered is @/controllerName/flowName/viewstateId@ (@/project/newProjectWizard/team.gsp@ in the example).
 
 The default view can be overridden with @render@:
 
-{groovySrc:class=DeveloperController|from=createDeveloper|lines=2|inline=true}
+{groovySrc:class=DeveloperController|from=createDeveloper|lines=2}
 {groovySrc}

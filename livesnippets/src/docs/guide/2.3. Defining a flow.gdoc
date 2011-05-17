@@ -5,7 +5,7 @@ and controller actions that refer to the flow.
 {note}
 
 Flows are defined in a builder syntax where each toplevel node represents a flow state:
-{code}
+{src}
 class ProjectController {
 
     def newProjectWizardFlow = {
@@ -21,7 +21,7 @@ class ProjectController {
              ...
         }
 }
-{code}
+{src}
 
 One of the big advantages of grails webflow is that you are able to write code in a flow definition, thus interweaving
 flow definition code and flow execution code. The logic in an XML definnition is less powerfull and more cumbersome.

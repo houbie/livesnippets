@@ -1,16 +1,16 @@
 Just like methods, subflows can return objects to the calling flow in an end state:
-{groovySrc:class=DeveloperController|from=selected|inline=true}
+{groovySrc:class=DeveloperController|from=selected}
 {groovySrc}
 
 The calling flow  can retrieve the result from the @currentEvent.attributes@, the same way as in standard Spring Web Flow:
-{groovySrc:class=ProjectController|from=on("selected")|inline=true}
+{groovySrc:class=ProjectController|from=on("selected")}
 {groovySrc}
 
 Output values can be either constant (created at flow definition time) or dynamic (calculated at flow execution time).
 Dynamic values need to be defined with a closure.
 
 The snippet below summarizes all possible ways to define flow output.
-{code}
+{src}
 subflowEndState {
     output {
         // the constant value will only once be assigned at flow definition time and will remain the same for all executions
@@ -27,7 +27,7 @@ subflowEndState {
     }
 }
 ...
-{code}
+{src}
 
 {note}
 Subflow output is only supported from grails 1.4.0 onward. In prior versions flash and conversation scope can be used

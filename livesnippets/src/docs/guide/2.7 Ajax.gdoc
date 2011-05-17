@@ -1,7 +1,7 @@
 Webflow supports ajax actions and partial view rendering, but there is not a lot of documentation on this subject.
 
 First of all, you define the ajax event as a transition from a view state to itself:
-{groovySrc:class=ProjectController|from=on("removeAjax")|inline=true}
+{groovySrc:class=ProjectController|from=on("removeAjax")}
 {groovySrc}
 
 Notice the @render@ call to render the template containing the ajax response.
@@ -16,12 +16,12 @@ template contains a link, this link won't have a @execution@ query parameter and
 flow execution. This is again solved by adding the query parameter manualy.
 
 The resulting ajax link becomes:
-{gspSrc:view=_editStories|from=<td><g:remoteLink|lines=2|inline=true}
+{gspSrc:view=_editStories|from=<td><g:remoteLink|lines=2}
 {gspSrc}
 
 The @formRemote@ suffers from the same problems. Additionally, a @submitButton@ in a @formRemote@ doesn't get the correct event
 being post. This can again be solved by adding the correct query parameter:
-{gspSrc:view=_editStories|from=<g:formRemote|lines=2|inline=true}
+{gspSrc:view=_editStories|from=<g:formRemote|lines=2}
 {gspSrc}
 
 If the @formRemote@ contains multiple @submitButton@s that need to post different events, the @_eventId@ can be put in a

@@ -2,8 +2,6 @@ package grails.doc.macros
 
 import java.util.regex.Pattern
 import org.radeox.macro.BaseMacro
-import org.radeox.macro.CodeMacro
-import org.radeox.macro.parameter.BaseMacroParameter
 import org.radeox.macro.parameter.MacroParameter
 import org.radeox.util.Encoder
 
@@ -21,50 +19,52 @@ class SourceMacro extends BaseMacro {
         return params.type ?: 'java'
     }
 
-    void execute(Writer out, MacroParameter params) {
-        boolean inline = params.params.inline as boolean
-        File file = findFile(getFileName(params.params))
-        String text = getSource(file, params.params)
-        String id = Encoder.escape(params.params.toString())
-        if (text) {
+    void execute(Writer out, MacroParameter macroParam) {
+        boolean inline = macroParam.params.inline != 'false'
+        boolean showLineNums = macroParam.params.lineNums != 'false'
+        File file = findFile(getFileName(macroParam.params))
+        Snippet snippet
+        if (macroParam.content.trim()) {
+            snippet = new Snippet(code: macroParam.content)
+        } else {
+            snippet = getSource(file, macroParam.params)
+        }
+        String id = Encoder.escape(macroParam.params.toString())
+        if (snippet) {
+            def lineNums = (snippet.firstLine > -1 && showLineNums) ? "linenums:${snippet.firstLine}" : ''
             if (!inline) {
-                out << /<p><a href="#${id}" id="a_${id}" /
-                out << /onclick="document.getElementById('${id}').style.display='inline'; document.getElementById('a_${id}').style.display='none'">/
-                out << /Show Source<\/a><\/p><div id="${id}" style="display:none;">/
+                out << "<p><a href=\"#${id}\" id=\"a_${id}\" "
+                out << "onclick=\"document.getElementById('${id}').style.display='inline'; document.getElementById('a_${id}').style.display='none'\">"
+                out << "Show Source</a></p><div id=\"${id}\" style=\"display:none;\">"
             } else {
-                out << /<div id="${id}">/
+                out << "<div id=\"${id}\">"
             }
-            text = Encoder.escape(text)
 
-            def macro = new CodeMacro()
-            macro.setInitialContext(initialContext)
-            def macroParams = new BaseMacroParameter()
-            macroParams.setParams(getCodeType(params.params))
-            macroParams.content = text
-            macro.execute(out, macroParams)
-            out << "<span class=\"file-name\">${file?.name}</span></div>"
+            out << "<pre class=\"prettyprint lang-${getCodeType(macroParam.params)} ${lineNums}\">"
+            out << Encoder.escape(snippet.code).replaceAll(/(?m)([ \t\r]*[\n]){2}/, '\n&nbsp;\n').replaceAll(/--/, '&#45;&#45;')
+            out << "</pre><span class=\"file-name\">${file?.name}</span></div>"
         }
     }
 
     File findFile(String fileName) {
         for (dir in baseDirs) {
-            File result
+            File result = null
             dir.traverse(nameFilter: fileName) { result = it }
             if (result) return result
         }
         return null
     }
 
-    String getSource(File file, Map params) {
+    Snippet getSource(File file, Map params) {
         String text = file?.text ?: ""
 
-        String code
+        Snippet snippet
         if (params.from) {
-            code = findCodeByFromToLines(params, text)
+            snippet = findCodeByFromToLines(params, text)
         } else {
-            code = findCodeByRegex(params, text)
+            snippet = findCodeByRegex(params, text)
         }
-        return code ?: "$params NOT FOUND"
+        return snippet ?: new Snippet(code: "$params NOT FOUND")
     }
 
     Pattern getRegularExpression(Map params) {
@@ -78,18 +78,18 @@ class SourceMacro extends BaseMacro {
         return params.'file'
     }
 
-    String findCodeByRegex(Map params, String text) {
+    Snippet findCodeByRegex(Map params, String text) {
         Pattern regex = getRegularExpression(params)
         if (regex != null) {
             def matcher = regex.matcher(text)
             if (matcher.find()) {
-                return matcher.group(1)
+                return new Snippet(code: matcher.group(1))
             }
-            return null
         }
+        return null
     }
 
-    String findCodeByFromToLines(Map params, String text) {
+    Snippet findCodeByFromToLines(Map params, String text) {
         List codeLines = text.readLines()
         int from = getLineNumber(params.from, codeLines)
         int to
@@ -105,7 +105,7 @@ class SourceMacro extends BaseMacro {
                 result << codeLines[it] << '\n'
             }
         }
-        return result.toString()
+        return new Snippet(firstLine: from + 1, code: result.toString())
     }
 
     protected int getLineNumber(String condition, List codeLines, int start = 0) {
@@ -147,4 +147,9 @@ class SourceMacro extends BaseMacro {
         return count
     }
 
+}
+
+protected class Snippet {
+    int firstLine = -1
+    String code
 }

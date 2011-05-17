@@ -1,11 +1,11 @@
 After the view is rendered, the user has to trigger an event to make the flow transition to the next state.
 
 User events can be triggered by clicking on a link that contains an event attribute:
-{gspSrc:view=team|from=<td><g:link|lines=2|inline=true}
+{gspSrc:view=team|from=<td><g:link|lines=2}
 {gspSrc}
 
 or by submitting a form:
-{gspSrc:view=team|from=<g:form|to=</g:form|inline=true}
+{gspSrc:view=team|from=<g:form|to=</g:form}
 {gspSrc}
 
 Note the use of @g:submitButton@ in stead of @g:actionSubmit@. The event that is triggered corresponds to the name attribute.

@@ -6,6 +6,6 @@ increases the execution count and therefore decreases the number of possible bac
 
 The size of the execution history can be increased by setting the @maxSnapshots@ property on the @flowExecutionRepository@ bean,
 f.e. in Config.groovy:
-{code}
+{src}
 beans.flowExecutionRepository.maxSnapshots = 100
-{code}
+{src}

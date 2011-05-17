@@ -2,5 +2,5 @@ A flow provides two event hooks:
 # onStart: a closure that is executed when a new flow execution is started
 # onEnd: a closure that is executed after the flow execution has ended
 
-{groovySrc:class=ProjectController|from=def newProjectWizardFlow|lines=8|inline=true}
+{groovySrc:class=ProjectController|from=def newProjectWizardFlow|lines=8}
 {groovySrc}

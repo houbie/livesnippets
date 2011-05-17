@@ -3,7 +3,7 @@ for all flows in all controllers. IntelliJ can then generate a flow diagram from
 
 The script also interprets dynamic transitions if you use a closure named with the convention @selectXorYorZ@, where X, Y and Z
 are the possible target states. The newProjectWizard flow contains an example:
-{groovySrc:class=ProjectController|from=on("selected", doSetLead|lines=1|inline=true}
+{groovySrc:class=ProjectController|from=on("selected", doSetLead|lines=1}
 {groovySrc}
 
 The resulting diagram can be useful documentation.
