@@ -30,7 +30,7 @@
 			</ul>
 			</g:hasErrors>
             %{-- change action to getDeveloper --}%
-			<g:form controller="developer" action="getDeveloper" >
+			<g:form>
 				<fieldset class="form">
 				
 					<div class="fieldcontain ${hasErrors(bean: developerInstance, field: 'name', 'error')} required">
