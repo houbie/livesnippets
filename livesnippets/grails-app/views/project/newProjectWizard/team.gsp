@@ -26,14 +26,13 @@
                     <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         <td>${fieldValue(bean: developer, field: "name")}</td>
                         <td>${fieldValue(bean: developer, field: "experience")}</td>
-                        <td><g:link controller="project" action="newProjectWizard"
-                                event="remove" params="${[name: developer.name]}">Remove</g:link></td>
+                        <td><g:link event="remove" params="${[name: developer.name]}">Remove</g:link></td>
                     </tr>
                 </g:each>
 				</tbody>
 			</table>
             <fieldset class="buttons">
-                <g:form controller="project" action="newProjectWizard">
+                <g:form>
                     <g:submitButton name="add" value="Add developer"/>
                     <g:submitButton name="next" value="Next"/>
                 </g:form>

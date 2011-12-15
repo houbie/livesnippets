@@ -5,7 +5,7 @@ and controller actions that refer to the flow.
 {note}
 
 Flows are defined in a builder syntax where each toplevel node represents a flow state:
-{src}
+{src:caption=Flow Definition}
 class ProjectController {
 
     def newProjectWizardFlow = {

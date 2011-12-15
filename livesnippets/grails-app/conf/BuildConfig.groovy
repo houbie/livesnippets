@@ -26,15 +26,14 @@ grails.project.dependency.resolution = {
     plugins {
         compile ':rich-domain:1.0.5'
 
-        compile ':resources:1.0.2'
-        compile ':jquery:1.7'
+        compile ':resources:1.1.6'
+        compile ':jquery:1.7.1'
         compile(":webflow:$grailsVersion")
 
         compile ":hibernate:$grailsVersion"
-        compile 'org.grails:grails-gdoc-engine:1.0.1'
 
         build ":tomcat:$grailsVersion"
-        build ':cloud-support:1.0.6'
+        build ':cloud-support:1.0.8'
         build ':cloud-foundry:1.2'
     }
 }

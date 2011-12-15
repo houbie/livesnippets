@@ -22,7 +22,7 @@ build-in @error@ event. The same view will be rendered again for the user, with 
 {groovySrc}
 
 {note}
-When using the ValidationGrailsPlugin (validation for non-domain classes) in combination with webflow, errors are not always
+When using the ValidationGrailsPlugin (validation for non-domain classes) prior to grails 2.0.0 in combination with webflow, errors are not always
 shown in the view. This happens when the object containing the errors is serialized and de-serialized by webflow.
-The [extended validation plugin|guide:3. Grails extended validation plugin] solves this problem.
+The [rich domain plugin|guide:3. Grails rich domain plugin] solves this problem.
 {note}

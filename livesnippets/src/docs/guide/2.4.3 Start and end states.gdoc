@@ -9,5 +9,5 @@ or states that only contain a @redirect@ call or [flow output|guide:2.4.4.3 Subf
 {groovySrc}
 
 {note}
-@redirect@ calls that take a uri or url parameter are not supported in end states
+Prior to 2.0.0, @redirect@ calls that take a uri or url parameter are not supported in end states
 {note}

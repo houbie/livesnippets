@@ -9,9 +9,9 @@ and for adding team members
 {groovySrc}
 
 As you can see, subflow states contain transitions just like view states and action states.
-The event that is actually triggered, is determined by the end state of the called subflow (getDeveloper flow):
+The event that is actually triggered, is determined by the end state of the called subflow (developerSelection flow):
 {groovySrc:class=DeveloperController|from=selected|lines=6}
 {groovySrc}
 
-If the getDeveloper flow ends in the @selected@ state, then the @selected@ event will be triggered in the @lead@  and @addTeamMember@ subflow states,
+If the developerSelection flow ends in the @selected@ state, then the @selected@ event will be triggered in the @lead@  and @addTeamMember@ subflow states,
 otherwise the @cancel@ event will be triggered.

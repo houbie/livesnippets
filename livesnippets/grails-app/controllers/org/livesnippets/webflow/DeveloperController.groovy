@@ -18,6 +18,8 @@ class DeveloperController {
                             developerInstanceTotal: Developer.countByExperience(flow.experience)]
                 } else {
                     [developerInstanceList: Developer.list(), developerInstanceTotal: Developer.count()]
+//                    we should take pagination and sorting into account, but following line throws an exception
+//                    see http://jira.grails.org/browse/GRAILS-8470
 //                    [developerInstanceList: Developer.list(params), developerInstanceTotal: Developer.count()]
                 }
             }

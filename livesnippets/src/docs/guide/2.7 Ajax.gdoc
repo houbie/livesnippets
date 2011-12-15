@@ -15,6 +15,10 @@ Another problem is that the flow execution id is not present in the ajax respons
 template contains a link, this link won't have a @execution@ query parameter and hence will force the creation of a new
 flow execution. This is again solved by adding the query parameter manualy.
 
+The last issue we have to deal with is the fact that we cannot leave the controller and action blank like in a @g:link@ and @g:form@.
+Remember that we prefer to create links that are relative to the current execution if we want or flows to be reusable as subflows.
+This is achieved by referring to the current controller and action names.
+
 The resulting ajax link becomes:
 {gspSrc:view=_editStories|from=<td><g:remoteLink|lines=2}
 {gspSrc}

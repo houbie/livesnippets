@@ -5,7 +5,7 @@ passing it as subflow input or output. If the semantic meaning is the same in th
 Otherwise it is better to use [subflow input|guide:2.4.4.2 Subflow input] or [subflow output|guide:2.4.4.3 Subflow output].
 
 {note}
-If you are using a version of grails prior to 1.4.0, you can mimic subflow input and output by using flash scope to pass objects
+If you are using a version of grails prior to 2.0.0, you can mimic subflow input and output by using flash scope to pass objects
 because flash scope is more 'local' than conversation scope.
 {note}
 

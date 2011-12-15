@@ -9,7 +9,7 @@ Furthermore, all (nested) subflows that can be called from the flow under test, 
 they appear in the flow definition. This is typically done in the test @setUp@.
 
 The @registerFlow@ takes two arguments:
-# the flow id: @controllerName/flowName@ ("developer/getDeveloper" in the example)
+# the flow id: @controllerName/flowName@ ("developer/developerSelection" in the example)
 # a flow definition closure
 
 There are two options for the flow definition.
@@ -20,7 +20,7 @@ Use the 'real' definition
 
 ... or provide a (simplified) mock flow:
 {src}
-registerFlow("developer/getDeveloper") {
+registerFlow("developer/developerSelection") {
     start{
         action{}
         on("success").to("cancel")

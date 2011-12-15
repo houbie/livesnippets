@@ -1,12 +1,12 @@
 Just like methods, subflows can define input arguments that will be put in its flow scope:
-{groovySrc:class=DeveloperController|from=def getDeveloperFlow|lines=5}
+{groovySrc:class=DeveloperController|from=def developerSelectionFlow|lines=5}
 {groovySrc}
 
 The values are provided in the calling flow:
 {groovySrc:class=ProjectController|from=subflow|lines=2}
 {groovySrc}
 
-If an input argument is marked as required then webflow will throw an exception if the calling flow does not provide a value.
+If an input argument is marked as required, then webflow will throw an exception if the calling flow does not provide a value.
 This implicates that a flow with required input arguments cannot be used standalone, but can only be called as subflow.
 
 Input arguments can have default values, either constant (created at flow definition time) or dynamic (calculated at flow execution time).
@@ -29,7 +29,7 @@ def mySubFlow = {
         bis( someValue)
 
         // the dynamic value will be evaluated each time the flow starts
-        dynamic { flow.someProperty }
+        dynamic { session.someProperty }
 
         // the dynamic value will be evaluated each time the flow starts
         dynamicBis (value: someClosure)
@@ -50,6 +50,6 @@ subflow(action: "subber",
 {src}
 
 {note}
-Subflow input arguments are only supported from grails 1.4.0 onward. In prior versions flash and conversation scope can be used
+Subflow input arguments are only supported from grails 2.0.0 onward. In prior versions flash and conversation scope can be used
 for passing objects from a flow to a subflow.
 {note}

@@ -24,10 +24,13 @@ class SourceMacro extends BaseMacro {
         boolean showLineNums = macroParam.params.lineNums != 'false'
         File file = findFile(getFileName(macroParam.params))
         Snippet snippet
+        String caption
         if (macroParam.content.trim()) {
             snippet = new Snippet(code: macroParam.content)
+            caption = macroParam.params.caption ?: ''
         } else {
             snippet = getSource(file, macroParam.params)
+            caption = file?.name
         }
         String id = Encoder.escape(macroParam.params.toString())
         if (snippet) {
@@ -41,8 +44,9 @@ class SourceMacro extends BaseMacro {
             }
 
             out << "<pre class=\"prettyprint lang-${getCodeType(macroParam.params)} ${lineNums}\">"
-            out << Encoder.escape(snippet.code).replaceAll(/(?m)([ \t\r]*[\n]){2}/, '\n&nbsp;\n').replaceAll(/--/, '&#45;&#45;').stripIndent()
-            out << "</pre><span class=\"file-name\">${file?.name}</span></div>"
+            //TODO: check replacement of ->
+            out << Encoder.escape(snippet.code).replaceAll(/(?m)([ \t\r]*[\n]){2}/, '\n&nbsp;\n').replaceAll(/--/, '&#45;&#45;').replaceAll(/->/, '&#45;&gt;').stripIndent()
+            out << "</pre><span class=\"file-name\">${caption}</span></div>"
         }
     }
 
