@@ -1,8 +1,0 @@
-2011-04-29 23:27:17,233 [main] ERROR context.ContextLoader  - Context initialization failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'grailsApplication' defined in ServletContext resource [/WEB-INF/applicationContext.xml]: Initialization of bean failed; nested exception is java.lang.reflect.MalformedParameterizedTypeException
-	at java.security.AccessController.doPrivileged(Native Method)
-	at org.grails.tomcat.IsolatedTomcat.main(IsolatedTomcat.java:101)
-Caused by: java.lang.reflect.MalformedParameterizedTypeException
-	at java.lang.Class.getGenericInterfaces(Class.java:794)
-	... 2 more
-Server running. Browse to http://localhost:8080/livesnippets

@@ -41,7 +41,7 @@ class SourceMacro extends BaseMacro {
             }
 
             out << "<pre class=\"prettyprint lang-${getCodeType(macroParam.params)} ${lineNums}\">"
-            out << Encoder.escape(snippet.code).replaceAll(/(?m)([ \t\r]*[\n]){2}/, '\n&nbsp;\n').replaceAll(/--/, '&#45;&#45;')
+            out << Encoder.escape(snippet.code).replaceAll(/(?m)([ \t\r]*[\n]){2}/, '\n&nbsp;\n').replaceAll(/--/, '&#45;&#45;').stripIndent()
             out << "</pre><span class=\"file-name\">${file?.name}</span></div>"
         }
     }

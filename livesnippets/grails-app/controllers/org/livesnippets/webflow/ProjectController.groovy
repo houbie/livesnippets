@@ -30,7 +30,7 @@ class ProjectController {
         }
 
         lead {
-            subflow(controller: "developer", action: "getDeveloper",
+            subflow(controller: "developer", action: "developerSelection",
                     input: [experience: Experience.SENIOR, title: "Select project lead"])
             on("selected") {
                 flow.projectInstance.lead = currentEvent.attributes.developer
@@ -56,7 +56,7 @@ class ProjectController {
         }
 
         addTeamMember {
-            subflow(controller: "developer", action: "getDeveloper", input: [title: "New project wizard: Select team member"])
+            subflow(controller: "developer", action: "developerSelection", input: [title: "New project wizard: Select team member"])
             on("selected") {
                 flow.projectInstance.addToTeam(currentEvent.attributes.developer)
             }.to("team")
@@ -113,7 +113,7 @@ class ProjectController {
         }
 
         lead {
-            subflow(controller: "developer", action: "getDeveloper",
+            subflow(controller: "developer", action: "developerSelection",
                     input: [experience: Experience.SENIOR, title: "Select project lead"])
             on("selected", doSetLead).to(selectLeadOrTeam)
             on("cancel", doFlashLeadMandatoryMessage).to("lead")
@@ -126,7 +126,7 @@ class ProjectController {
         }
 
         addTeamMember {
-            subflow(controller: "developer", action: "getDeveloper", input: [title: "Select team member"])
+            subflow(controller: "developer", action: "developerSelection", input: [title: "Select team member"])
             on("selected", doAddTeamMember).to("team")
             on("cancel").to("team")
         }

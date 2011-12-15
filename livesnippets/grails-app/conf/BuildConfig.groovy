@@ -1,34 +1,41 @@
+grails.servlet.version = "2.5" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
+grails.project.target.level = 1.6
+//grails.project.war.file = "target/${appName}-${appVersion}.war"
 grails.project.docs.output.dir = "web-app/docs"
-
-grails.compile.artefacts.closures.convert = false
 
 grails.project.dependency.resolution = {
     inherits("global")
-
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    checksums true // Whether to verify checksums on resolve
 
     repositories {
+        inherits true // Whether to inherit repository definitions from plugins
         grailsPlugins()
         grailsHome()
         grailsCentral()
-        mavenLocal()
         mavenCentral()
-        ebr()
+        mavenLocal()
     }
 
     dependencies {
     }
 
     plugins {
-        compile(':extended-validation:1.0.4')
+        compile ':rich-domain:1.0.5'
+
+        compile ':resources:1.0.2'
+        compile ':jquery:1.7'
         compile(":webflow:$grailsVersion")
-        compile(":hibernate:$grailsVersion")
-        compile(":jquery:1.5.2")
-        build(":tomcat:$grailsVersion")
-        build(':cloud-foundry:1.0.0.M3')
+
+        compile ":hibernate:$grailsVersion"
+        compile 'org.grails:grails-gdoc-engine:1.0.1'
+
+        build ":tomcat:$grailsVersion"
+        build ':cloud-support:1.0.6'
+        build ':cloud-foundry:1.2'
     }
 }
 

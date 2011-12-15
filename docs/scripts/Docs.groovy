@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
+import grails.doc.DocPublisher
+import grails.doc.LegacyDocMigrator
+import grails.doc.PdfBuilder
+import grails.util.GrailsNameUtils
+import org.apache.tools.ant.types.Path
 import org.codehaus.groovy.grails.documentation.DocumentationContext
 import org.codehaus.groovy.grails.documentation.DocumentedMethod
 import org.codehaus.groovy.grails.resolve.IvyDependencyManager
-
-import grails.util.GrailsNameUtils
-import grails.doc.DocPublisher
-import grails.doc.PdfBuilder
 
 /**
  * @author Graeme Rocher
@@ -30,8 +31,6 @@ import grails.doc.PdfBuilder
  */
 
 includeTargets << grailsScript("_GrailsPackage")
-
-setDefaultTarget("docs")
 
 javadocDir = "${grailsSettings.docsOutputDir}/api"
 groovydocDir = "${grailsSettings.docsOutputDir}/gapi"
@@ -47,11 +46,14 @@ createdPdf = false
 
 target(docs: "Produces documentation for a Grails project") {
     parseArguments()
-    def srcDocsDir= argsMap.srcdir ?: '/src/docs'
     if (argsMap.init) {
-        ant.mkdir(dir:"${basedir}${srcDocsDir}/guide")
-        ant.mkdir(dir:"${basedir}${srcDocsDir}/ref/Items")
-        new File("${basedir}${srcDocsDir}/guide/1. Introduction.gdoc").write '''
+        ant.mkdir(dir:"${basedir}/src/docs/guide")
+        ant.mkdir(dir:"${basedir}/src/docs/ref/Items")
+        new File("${basedir}/src/docs/guide/toc.yml").write '''\
+introduction: Introduction
+'''
+
+        new File("${basedir}/src/docs/guide/introduction.gdoc").write '''\
 This is an example documentation template. The syntax format is similar to "Textile":http://textile.thresholdstate.com/.
 
 You can apply formatting such as *bold*, _italic_ and @code@. Bullets are possible too:
@@ -64,10 +66,10 @@ As well as numbered lists:
 # Number 1
 # Number 2
 
-The documentation also handles links to [guide items|guide:1. Introduction] as well as [reference|items]
-        '''
+The documentation also handles links to [guide items|guide:introduction] as well as [reference|items]
+'''
 
-        new File("${basedir}${srcDocsDir}/ref/Items/reference.gdoc").write '''
+        new File("${basedir}/src/docs/ref/Items/reference.gdoc").write '''\
 h1. example
 
 h2. Purpose
@@ -85,9 +87,9 @@ def example = new Example()
 h2. Description
 
 And provide a detailed description
-        '''
+'''
 
-        println "Example documentation created in ${basedir}${srcDocsDir}. Use 'grails doc' to publish."
+        grailsConsole.updateStatus "Example documentation created in ${basedir}/src/docs. Use 'grails doc' to publish."
     }
     else {
         docsInternal()
@@ -116,8 +118,35 @@ target(groovydoc:"Produces groovydoc documentation") {
 
     ant.taskdef(name:"groovydoc", classname:"org.codehaus.groovy.ant.Groovydoc")
     event("DocStart", ['groovydoc'])
+
+    def sourcePath = new Path(ant.project)
+    for (dir in projectCompiler.srcDirectories) {
+        sourcePath.add new Path(ant.project, dir)
+    }
+
+    if (isPluginProject) {
+        def pluginDescriptor = grailsSettings.baseDir.listFiles().find { it.name.endsWith "GrailsPlugin.groovy" }
+        def tmpDir = new File(grailsSettings.projectWorkDir, "pluginDescForDocs")
+        tmpDir.deleteOnExit()
+
+        // Copy the plugin descriptor to a temporary directory and add that
+        // directory to groovydoc's source path. This is because adding '.'
+        // will cause all Groovy files in the project to be included as source
+        // files (including test cases) and it will also cause duplication
+        // of classes in the generated docs - see
+        //
+        //     http://jira.grails.org/browse/GRAILS-6530
+        //
+        // Also, we can't add a single file to the path. Only directories
+        // seem to work. There are quite a few limitations with the GroovyDoc
+        // task currently.
+        ant.copy file: pluginDescriptor, todir: tmpDir, overwrite: true
+
+        sourcePath.add new Path(ant.project, tmpDir.absolutePath)
+    }
+
     try {
-        ant.groovydoc(destdir:groovydocDir, sourcepath:".", use:"true",
+        ant.groovydoc(destdir:groovydocDir, sourcepath:sourcePath, use:"true",
                       windowtitle:grailsAppName,'private':"true")
     }
     catch(Exception e) {
@@ -168,10 +197,13 @@ target(javadoc:"Produces javadoc documentation") {
 
 target(refdocs:"Generates Grails style reference documentation") {
     depends(parseArguments, createConfig,loadPlugins, setupDoc)
-    def srcDocsDir= argsMap.srcdir ?: '/src/docs'
-    if (docsDisabled()) return
 
-    def srcDocs = new File("${basedir}${srcDocsDir}")
+    if (docsDisabled()) {
+        event("DocSkip", ["refdocs"])
+        return
+    }
+
+    def srcDocs = new File("${basedir}/src/docs")
 
     def context = DocumentationContext.getInstance()
     if (context?.hasMetadata()) {
@@ -181,7 +213,7 @@ target(refdocs:"Generates Grails style reference documentation") {
                 ant.mkdir(dir:refDir)
                 def refFile = new File("${refDir}/${m.name}.gdoc")
                 if (!refFile.exists()) {
-                    println "Generating documentation ${refFile}"
+                    grailsConsole.updateStatus "Generating documentation ${refFile}"
                     refFile.write """
 h1. ${m.name}
 
@@ -209,8 +241,10 @@ ${m.arguments?.collect { '* @'+GrailsNameUtils.getPropertyName(it)+'@\n' }}
     }
 
     if (srcDocs.exists()) {
+        event("DocStart", ["refdocs"])
+
         File refDocsDir = grailsSettings.docsOutputDir
-        def publisher = new DocPublisher(srcDocs, refDocsDir)
+        def publisher = new DocPublisher(srcDocs, refDocsDir, grailsConsole)
         publisher.ant = ant
         publisher.title = grailsAppName
         publisher.subtitle = grailsAppName
@@ -225,13 +259,24 @@ ${m.arguments?.collect { '* @'+GrailsNameUtils.getPropertyName(it)+'@\n' }}
         readDocProperties(publisher)
         configureAliases()
 
-        event("RefDocStart", [publisher])
+        event("DocPublish", [publisher])
 
-        publisher.publish()
+        try {
+            publisher.publish()
 
-        createdManual = true
-
-        println "Built user manual at ${refDocsDir}/index.html"
+            createdManual = true
+            grailsConsole.updateStatus "Built user manual at ${refDocsDir}/index.html"
+        }
+        catch (RuntimeException ex) {
+            if (ex.message) {
+                grailsConsole.error "Failed to build user manual.", ex
+            }
+            else {
+                grailsConsole.error "Failed to build user manual."
+            }
+            exit 1
+        }
+        event("DocEnd", ["refdocs"])
     }
 }
 
@@ -258,41 +303,54 @@ target(pdf: "Produces PDF documentation") {
 }
 
 target(createIndex: "Produces an index.html page in the root directory") {
-	if (docsDisabled()) {
-		 return
-	}
+    if (docsDisabled()) {
+         return
+    }
 
-	new File("${grailsSettings.docsOutputDir}/all-docs.html").withWriter { writer ->
-		writer.write """\
+    new File("${grailsSettings.docsOutputDir}/all-docs.html").withWriter { writer ->
+        writer.write """\
 <html>
 
-	<head>
-		<title>$grailsAppName Documentation</title>
-	</head>
-    
-	<body>
-		<a href="api/index.html">Java API docs</a><br />
-		<a href="gapi/index.html">Groovy API docs</a><br />
+    <head>
+        <title>$grailsAppName Documentation</title>
+    </head>
+
+    <body>
+        <a href="api/index.html">Java API docs</a><br />
+        <a href="gapi/index.html">Groovy API docs</a><br />
 """
 
-		if (createdManual) {
-			writer.write '\t\t<a href="guide/index.html">Manual (Page per chapter)</a><br />\n'
-			writer.write '\t\t<a href="guide/single.html">Manual (Single page)</a><br />\n'
-		}
+        if (createdManual) {
+            writer.write '\t\t<a href="guide/index.html">Manual (Page per chapter)</a><br />\n'
+            writer.write '\t\t<a href="guide/single.html">Manual (Single page)</a><br />\n'
+        }
 
-		if (createdPdf) {
-			writer.write '\t\t<a href="guide/single.pdf">Manual (PDF)</a><br />\n'
-		}
+        if (createdPdf) {
+            writer.write '\t\t<a href="guide/single.pdf">Manual (PDF)</a><br />\n'
+        }
 
-		writer.write """\
-	</body>
+        writer.write """\
+    </body>
 </html>
 """
-	}
+    }
+}
+
+target(migrateDocs: "Migrates an old-style gdoc user guide to the current approach using a YAML TOC file.") {
+    depends createConfig
+
+    def guideDir = new File(grailsSettings.baseDir, "src/docs/guide")
+    if (guideDir.exists()) {
+        def outDir = new File(guideDir.parentFile, "migratedGuide")
+        def migrator = new LegacyDocMigrator(guideDir, outDir, config.grails.doc.alias)
+        migrator.migrate()
+
+        grailsConsole.updateStatus "Migrated user guide at ${outDir.path}"
+    }
 }
 
 def readPluginMetadataForDocs(DocPublisher publisher) {
-    def basePlugin = loadBasePlugin()
+    def basePlugin = loadBasePlugin()?.instance
     if (basePlugin) {
         if (basePlugin.hasProperty("title")) {
             publisher.title = basePlugin.title
@@ -336,3 +394,5 @@ private readIfSet(DocPublisher publisher,String prop) {
 private loadBasePlugin() {
     pluginManager?.allPlugins?.find { it.basePlugin }
 }
+
+setDefaultTarget("docs")

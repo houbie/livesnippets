@@ -4,8 +4,9 @@
     <head>
         <title>${title.encodeAsHtml()} ${version}</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel="stylesheet" href="${path}/css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
-        <link rel="stylesheet" href="${path}/css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
+        <link rel="stylesheet" href="${resourcesPath}/css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
+        <link rel="stylesheet" href="${resourcesPath}/css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
+        <link rel="stylesheet" href="${resourcesPath}/css/prettify.css" type="text/css" charset="utf-8"/>
     <script type="text/javascript">
 function addJsClass(el) {
     var classes = document.body.className.split(" ");
@@ -23,15 +24,15 @@ function addJsClass(el) {
                         <a href="${path}/guide/index.html" class="button">Table of contents</a>
                         <div id="nav-summary-childs" style="display:none;">
                             <%
-                            for (ch in toc) {
+                            toc.children.eachWithIndex { ch, i ->
                                 if (single) {
                             %>
-                            <div class="toc-item" style="margin-left:0"><a href="#${ ch.title.encodeAsUrlFragment().encodeAsHtml() }">${ch.title?.encodeAsHtml()?.replaceFirst(/([^\s]*)\s(.*)/, '<strong>$1</strong><span>$2</span>')}</a></div>
+                            <div class="toc-item" style="margin-left:0"><a href="#${ ch.name.encodeAsUrlFragment().encodeAsHtml() }"><strong>${i + 1}</strong><span>${ch.title?.encodeAsHtml()}</span></a></div>
                             <%
                                 }
                                 else {
                             %>
-                            <div class="toc-item" style="margin-left:0"><a href="${path}/guide/${ch.title.encodeAsUrlPath().encodeAsHtml()}.html">${ch.title?.encodeAsHtml()?.replaceFirst(/([^\s]*)\s(.*)/, '<strong>$1</strong><span>$2</span>')}</a></div>
+                            <div class="toc-item" style="margin-left:0"><a href="${path}/guide/${ch.name.encodeAsUrlPath().encodeAsHtml()}.html"><strong>${i + 1}</strong><span>${ch.title?.encodeAsHtml()}</span></a></div>
                             <%
                                 }
                             }
@@ -68,32 +69,35 @@ function addJsClass(el) {
                             <h1>${title.encodeAsHtml()} - Reference Documentation</h1>
                             <p><strong>Authors:</strong> ${authors}</p>
                             <p><strong>Version:</strong> ${version}</p>
+                            <% if (translators) { %>
+                            <p><strong>Translated by:</strong> ${translators}</p>
+                            <% } %>
                         </div>
 
                         <% if(toc){ %>
                         <div id="table-of-content">
                             <h2>Table of Contents</h2>
                             <%
-                            sectionWriter = { lvl, section, topSection ->
+                            sectionWriter = { lvl, section, topSection, prefix ->
                                 if (single) {
                             %>
-                            <div class="toc-item" style="margin-left:${lvl * 10}px"><a href="#${ section.title.encodeAsUrlFragment().encodeAsHtml() }">${section.title?.encodeAsHtml()?.replaceFirst(/([^\s]*)\s(.*)/, '<strong>$1</strong><span>$2</span>')}</a></div>
+                            <div class="toc-item" style="margin-left:${lvl * 10}px"><a href="#${ section.name.encodeAsUrlFragment().encodeAsHtml() }"><strong>$prefix</strong><span>${section.title?.encodeAsHtml()}</span></a></div>
                             <%
                                 }
                                 else {
                             %>
-                            <div class="toc-item" style="margin-left:${lvl * 10}px"><a href="${path}/guide/${topSection.title.encodeAsUrlPath().encodeAsHtml()}.html${ lvl == 0 ? '' : '#' + section.title.encodeAsUrlFragment().encodeAsHtml() }">${section.title?.encodeAsHtml()?.replaceFirst(/([^\s]*)\s(.*)/, '<strong>$1</strong><span>$2</span>')}</a></div>
+                            <div class="toc-item" style="margin-left:${lvl * 10}px"><a href="${path}/guide/${topSection.name.encodeAsUrlPath().encodeAsHtml()}.html${ lvl == 0 ? '' : '#' + section.name.encodeAsUrlFragment().encodeAsHtml() }"><strong>$prefix</strong><span>${section.title?.encodeAsHtml()}</span></a></div>
                             <%
                                 }
 
                                 lvl++
-                                for (s in section.subSections) {
-                                    sectionWriter.call(lvl, s, topSection)
+                                section.children.eachWithIndex { s, j ->
+                                    sectionWriter.call(lvl, s, topSection, prefix + '.' + (j + 1))
                                 }
                             }
 
-                            for (topSection in toc) {
-                                sectionWriter.call(0, topSection, topSection)
+                            toc.children.eachWithIndex { topSection, i ->
+                                sectionWriter.call(0, topSection, topSection, i + 1)
                             }
                             %>
                             <div style="clear:both" ></div>
@@ -134,9 +138,8 @@ function addJsClass(el) {
 
 
 
-        <script type="text/javascript" src="${path}/js/docs.js"></script>
-        <script type="text/javascript" src="${path}/js/prettify.js"></script>
-        <script type="text/javascript">prettyPrint()</script>
-
+<script type="text/javascript" src="${resourcesPath}/js/docs.js"></script>
+<script type="text/javascript" src="${path}/js/prettify.js"></script>
+<script type="text/javascript">prettyPrint()</script>
     </body>
 </html>

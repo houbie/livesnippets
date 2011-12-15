@@ -1,6 +1,6 @@
+@import "custom.css";
 @import "tools.css";
 @import "skin.css";
-@import "prettify.css";
 
 /*
 ////////////////////////////////////////////////////////////////////////////////
@@ -455,7 +455,7 @@ img.float-right {
 
 /*
 .graph-image {
-  position: relative; 
+  position: relative;
   width: 100%;
 }
 */
@@ -635,6 +635,10 @@ ol.HEBREW {
     list-style-type: hebrew;
 }
 
+li {
+    margin-top: 0.7em;
+}
+
 /************************************************/
 /* index formatting                             */
 .index-top {
@@ -685,11 +689,6 @@ ol.HEBREW {
     border: 3px solid #cccccc;
 }
 
-li {
-    margin-bottom: 2px;
-    margin-top: 2px;
-}
-
 /*
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -720,9 +719,4 @@ li {
 
 #navigation a, #nav-summary #nav-summary-childs a:hover {
     text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.8);
-}
-
-.file-name {
-    color: blue;
-    font-size: small;
 }

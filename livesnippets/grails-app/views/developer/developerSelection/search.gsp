@@ -11,7 +11,7 @@
 		<div class="nav" role="navigation">
 			<ul>
                 %{-- change action to event --}%
-				<li><g:link class="create" controller="developer" action="getDeveloper" event="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="create" event="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
 		<div id="list-developer" class="content scaffold-list" role="main">
@@ -37,7 +37,7 @@
 					<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 
                         %{-- make controller  explicit and changed action='show' to 'getDeveloper; added event='select'; --}%
-						<td><g:link controller="developer" action="getDeveloper" event="select" id="${developerInstance.id}">${fieldValue(bean: developerInstance, field: "name")}</g:link></td>
+						<td><g:link event="select" id="${developerInstance.id}">${fieldValue(bean: developerInstance, field: "name")}</g:link></td>
 					
 						<td>${fieldValue(bean: developerInstance, field: "experience")}</td>
 					
@@ -48,7 +48,7 @@
 			<fieldset class="pagination">
 				<g:paginate total="${developerInstanceTotal}" />
 			</fieldset>
-            <g:link controller="developer" action="getDeveloper" event="cancel">Cancel</g:link>
+            <g:link event="cancel">Cancel</g:link>
 		</div>
 	</body>
 </html>

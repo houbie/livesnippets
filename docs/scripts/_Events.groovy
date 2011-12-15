@@ -1,6 +1,6 @@
 import grails.doc.DocPublisher
 
-eventRefDocStart = { DocPublisher publisher ->
+eventDocPublish = { DocPublisher publisher ->
     def tagSourceMacro = classLoader.loadClass('grails.doc.macros.TagSourceMacro').newInstance(getAllDirs('grails-app/taglib'))
     publisher.registerMacro(tagSourceMacro)
 

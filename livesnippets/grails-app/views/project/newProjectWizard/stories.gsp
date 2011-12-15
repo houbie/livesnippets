@@ -5,6 +5,7 @@
     <meta name="layout" content="main">
     <g:set var="entityName" value="${message(code: 'project.label', default: 'Project')}"/>
     <title>Stories</title>
+    <r:require module="jquery"/>
 </head>
 <body>
 <div id="create-project" class="content scaffold-create" role="main">

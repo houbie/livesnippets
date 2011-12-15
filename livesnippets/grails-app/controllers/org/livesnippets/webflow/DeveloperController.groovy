@@ -4,7 +4,7 @@ class DeveloperController {
 
     def scaffold = true
 
-    def getDeveloperFlow = {
+    def developerSelectionFlow = {
         input {
             title(required: true)
             experience()
@@ -17,7 +17,8 @@ class DeveloperController {
                     [developerInstanceList: Developer.findAllByExperience(flow.experience, params),
                             developerInstanceTotal: Developer.countByExperience(flow.experience)]
                 } else {
-                    [developerInstanceList: Developer.list(params), developerInstanceTotal: Developer.count()]
+                    [developerInstanceList: Developer.list(), developerInstanceTotal: Developer.count()]
+//                    [developerInstanceList: Developer.list(params), developerInstanceTotal: Developer.count()]
                 }
             }
             onExit {

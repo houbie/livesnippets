@@ -1,6 +1,6 @@
 package org.livesnippets.extendedvalidation
 
-import be.ixor.grails.extendedvalidation.Validateable
+import be.ixor.grails.richdomain.validation.Validateable
 import org.livesnippets.extendedvalidation.Customer.CreditScore
 
 @Validateable

@@ -9,7 +9,7 @@ class ProjectControllerTests extends WebFlowTestCase {
     protected void setUp() {
         super.setUp()
         //register all subflows
-        registerFlow("developer/getDeveloper", new DeveloperController().getDeveloperFlow)
+        registerFlow("developer/developerSelection", new DeveloperController().developerSelectionFlow)
     }
 
 

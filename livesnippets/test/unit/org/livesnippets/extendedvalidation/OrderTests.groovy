@@ -1,19 +1,8 @@
 package org.livesnippets.extendedvalidation
 
-import be.ixor.grails.extendedvalidation.ValidationHelper
 import org.livesnippets.extendedvalidation.Customer.CreditScore
 
 class OrderTests extends GroovyTestCase {
-
-    protected void setUp() {
-        super.setUp()
-
-        ValidationHelper.addValidationMethods(Order, null)
-        ValidationHelper.addValidationMethods(Customer, null)
-        ValidationHelper.addValidationMethods(OrderLine, null)
-        ValidationHelper.addValidationMethods(Address, null)
-    }
-
 
     void testConstraints() {
         Order order = new Order()

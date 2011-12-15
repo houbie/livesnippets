@@ -1,9 +1,9 @@
+grails.servlet.version = "2.5" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
+grails.project.target.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
-
-grails.compile.artefacts.closures.convert = false
 
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -11,14 +11,17 @@ grails.project.dependency.resolution = {
         // uncomment to disable ehcache
         // excludes 'ehcache'
     }
-    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    log "error" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    checksums true // Whether to verify checksums on resolve
+
     repositories {
+        inherits true // Whether to inherit repository definitions from plugins
         grailsPlugins()
         grailsHome()
         grailsCentral()
+        mavenCentral()
 
-        // uncomment the below to enable remote dependency resolution
-        // from public Maven repositories
+        // uncomment these to enable remote dependency resolution from public Maven repositories
         //mavenCentral()
         //mavenLocal()
         //mavenRepo "http://snapshots.repository.codehaus.org"
@@ -27,8 +30,9 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.jboss.com/maven2/"
     }
     dependencies {
-        // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
+        compile 'org.grails:grails-gdoc-engine:1.0.1'
+    }
 
-        // runtime 'mysql:mysql-connector-java:5.1.5'
+    plugins {
     }
 }
