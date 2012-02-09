@@ -17,7 +17,59 @@ class WebflowTagLib {
 
     FlowExecutionRepository flowExecutionRepository
     def messageSource
-    
+
+    /**
+     * Creates a link that triggers a webflow event that can be invoked via ajax.
+     *
+     * @attr event Webflow _eventId parameter
+     * @attr update Either a map containing the elements to update for 'success' or 'failure' states, or a string with the element to update in which cause failure events would be ignored
+     * @attr before The javascript function to call before the remote function call
+     * @attr after The javascript function to call after the remote function call
+     * @attr asynchronous Whether to do the call asynchronously or not (defaults to true)
+     * @attr method The method to use the execute the call (defaults to "post")
+     * @attr id The id to use in the link
+     * @attr params A map containing URL query parameters
+     */
+    def remoteLink = {attrs, body ->
+        attrs.controller = controllerName
+        attrs.action = actionName
+        if (attrs.params == null) {
+            atts.params = [:]
+        }
+        attrs.params.ajaxSource = true
+        if (!request['flowExecutionKey']) {
+            request['flowExecutionKey'] = params.execution
+        }
+        out << g.remoteLink(attrs, body)
+    }
+
+    /**
+     * A form which uses the javascript provider to serialize its parameters and submit via an asynchronous ajax call in a webflow.
+     *
+     * @attr event Webflow _eventId parameter
+     * @attr name REQUIRED The form name
+     * @attr update Either a map containing the elements to update for 'success' or 'failure' states, or a string with the element to update in which cause failure events would be ignored
+     * @attr before The javascript function to call before the remote function call
+     * @attr after The javascript function to call after the remote function call
+     * @attr asynchronous Whether to do the call asynchronously or not (defaults to true)
+     * @attr method The method to use the execute the call (defaults to "post")
+     */
+    def formRemote = {attrs, body ->
+        def url = [:]
+        url.controller = controllerName
+        url.action = actionName
+        url.params = attrs.params ?: [:]
+        url.params.ajaxSource = true
+        if (!request['flowExecutionKey']) {
+            request['flowExecutionKey'] = params.execution
+        }
+        if (attrs.event) {
+            url.params._eventId = attrs.remove('event')
+        }
+        attrs.url = url
+        out << g.formRemote(attrs, body)
+    }
+
     def breadCrumbs = {attrs ->
         FlowExecutionImpl execution = flowExecution
         if (execution) {

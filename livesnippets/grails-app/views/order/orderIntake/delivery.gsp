@@ -1,4 +1,4 @@
-<%@ page import="org.livesnippets.extendedvalidation.Product; org.livesnippets.extendedvalidation.Customer.CreditScore; org.livesnippets.webflow.Project" %>
+<%@ page import="org.livesnippets.richdomain.PaymentMethod; org.livesnippets.richdomain.Product; org.livesnippets.webflow.Project" %>
 <!doctype html>
 <html>
 	<head>
@@ -18,22 +18,23 @@
                     </g:each>
                 </ul>
             </g:if>
-			<g:form action="orderIntake" >
+			<g:form >
                 <g:each in="${order.orderLines}" var="orderLine" status="i">
+                    <h3>Delivery address for ${orderLine.quantity} ${orderLine.product}</h3>
                     <fieldset class="form">
                         <div class="fieldcontain ${hasErrors(bean: orderLine.deliveryAddress, field: 'street', 'error')} required">
-                            <label for="name">Delivery street<span class="required-indicator">*</span></label>
+                            <label f>Delivery street<span class="required-indicator">*</span></label>
                             <g:textField name="orderLines[${i}].deliveryAddress.street" required="" value="${orderLine.deliveryAddress.street}"/>
                         </div>
                         <div class="fieldcontain ${hasErrors(bean: orderLine.deliveryAddress, field: 'city', 'error')} required">
-                            <label for="name">Delivery city<span class="required-indicator">*</span></label>
+                            <label >Delivery city<span class="required-indicator">*</span></label>
                             <g:textField name="orderLines[${i}].deliveryAddress.city" required="" value="${orderLine.deliveryAddress.city}"/>
                         </div>
 
                     </fieldset>
                 </g:each>
                 <fieldset class="buttons">
-					<g:submitButton name="finish" value="Finish" />
+					<g:submitButton name="next" value="${order.paymentMethod == PaymentMethod.CREDIT_CARD ? "Next" : "Finish"}" />
 				</fieldset>
 			</g:form>
 		</div>

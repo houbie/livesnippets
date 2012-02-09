@@ -1,4 +1,4 @@
-package org.livesnippets.extendedvalidation
+package org.livesnippets.richdomain
 
 import org.springframework.web.context.request.RequestContextHolder
 
@@ -16,6 +16,8 @@ class OrderController {
                 bindData(flow.order, params)
                 if (!flow.order.validate(groups: ["invoiceData"])) {
                     error()
+                } else if (flow.order.paymentMethod == PaymentMethod.CREDIT_CARD) {
+                    flow.order.creditCard = new CreditCard()
                 }
             }.to("products")
         }
@@ -34,6 +36,18 @@ class OrderController {
         }
 
         delivery {
+            on("next") {
+                bindData(flow.order, params)
+                def validationIncludes = flow.order.paymentMethod == PaymentMethod.CREDIT_CARD ? ["orderLines"] : null
+                if (!flow.order.validate(includes: validationIncludes)) {
+                    error()
+                } else {
+                    RequestContextHolder.currentRequestAttributes().flashScope.newOrder = flow.order
+                }
+            }.to { flow.order.paymentMethod == PaymentMethod.CREDIT_CARD ? "creditCard" : "end" }
+        }
+
+        creditCard {
             on("finish") {
                 bindData(flow.order, params)
                 if (!flow.order.validate()) {

@@ -1,4 +1,4 @@
-<%@ page import="org.livesnippets.extendedvalidation.Product; org.livesnippets.extendedvalidation.Customer.CreditScore; org.livesnippets.webflow.Project" %>
+<%@ page import="org.livesnippets.richdomain.Product; org.livesnippets.webflow.Project" %>
 <!doctype html>
 <html>
 	<head>
@@ -18,16 +18,16 @@
                     </g:each>
                 </ul>
             </g:if>
-			<g:form action="orderIntake" >
+			<g:form >
                 <g:each in="${order.orderLines}" var="orderLine" status="i">
                     <fieldset class="form">
 
                         <div class="fieldcontain ${hasErrors(bean: orderLine, field: 'product', 'error')} required">
-                            <label for="experience">Product<span class="required-indicator">*</span></label>
+                            <label >Product<span class="required-indicator">*</span></label>
                             <g:select name="orderLines[${i}].product" from="${Product.values()}" required="" value="${orderLine.product}"/>
                         </div>
                         <div class="fieldcontain ${hasErrors(bean: orderLine, field: 'quantity', 'error')} required">
-                            <label for="name">Quantity<span class="required-indicator">*</span></label>
+                            <label >Quantity<span class="required-indicator">*</span></label>
                             <g:textField name="orderLines[${i}].quantity" required="" value="${orderLine.quantity}"/>
                         </div>
                     </fieldset>

@@ -1,2 +1,2 @@
-{groovySrc:class=Order|from=creditCheck}
+{groovySrc:class=Order|from=maxInvoiceQuantity}
 {groovySrc}

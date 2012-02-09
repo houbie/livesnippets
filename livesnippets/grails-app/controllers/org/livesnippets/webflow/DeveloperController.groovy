@@ -1,8 +1,12 @@
 package org.livesnippets.webflow
 
+import webflow.ProjectDataCleanerService
+
 class DeveloperController {
 
     def scaffold = true
+
+    ProjectDataCleanerService projectDataCleanerService
 
     def developerSelectionFlow = {
         input {
@@ -44,7 +48,7 @@ class DeveloperController {
                 if (!developer.validate()) {
                     error()
                 } else {
-                    [developer : developer]
+                    [developer: developer]
                 }
             }.to("selected")
             on("cancel").to("cancel")
@@ -57,5 +61,4 @@ class DeveloperController {
         }
         cancel()
     }
-
 }

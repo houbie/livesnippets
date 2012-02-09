@@ -103,3 +103,6 @@ grails{
         style = new File('./src/docs/style')
     }
 }
+
+
+beans.cleanDataCronTrigger.cronExpression='0 0 1 * * ?'

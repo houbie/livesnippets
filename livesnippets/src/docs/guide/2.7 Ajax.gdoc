@@ -19,13 +19,14 @@ The last issue we have to deal with is the fact that we cannot leave the control
 Remember that we prefer to create links that are relative to the current execution if we want or flows to be reusable as subflows.
 This is achieved by referring to the current controller and action names.
 
-The resulting ajax link becomes:
-{gspSrc:view=_editStories|from=<td><g:remoteLink|lines=2}
+In stead of adding all the mentioned query parameters by hand, the modified @remoteLink@ tag included in the demo app takes care of everything:
+
+{gspSrc:view=_editStories|from=<td><flow:remoteLink|lines=2}
 {gspSrc}
 
 The @formRemote@ suffers from the same problems. Additionally, a @submitButton@ in a @formRemote@ doesn't get the correct event
-being post. This can again be solved by adding the correct query parameter:
-{gspSrc:view=_editStories|from=<g:formRemote|lines=2}
+being post. This can again be solved by adding the correct query parameter, which is done by the modified @formRemote@ in the @WebflowTagLib@:
+{gspSrc:view=_editStories|from=<flow:formRemote|lines=1}
 {gspSrc}
 
 If the @formRemote@ contains multiple @submitButton@s that need to post different events, the @_eventId@ can be put in a

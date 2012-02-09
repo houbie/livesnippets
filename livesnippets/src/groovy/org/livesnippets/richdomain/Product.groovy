@@ -1,4 +1,4 @@
-package org.livesnippets.extendedvalidation
+package org.livesnippets.richdomain
 
 enum Product {
     Apples,

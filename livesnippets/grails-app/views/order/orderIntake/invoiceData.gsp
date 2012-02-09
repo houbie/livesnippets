@@ -1,4 +1,4 @@
-<%@ page import="org.livesnippets.extendedvalidation.Customer.CreditScore; org.livesnippets.webflow.Project" %>
+<%@ page import="org.livesnippets.richdomain.PaymentMethod; org.livesnippets.webflow.Project" %>
 <!doctype html>
 <html>
 	<head>
@@ -18,27 +18,27 @@
                     </g:each>
                 </ul>
             </g:if>
-            <g:form action="orderIntake" >
+            <g:form >
 				<fieldset class="form">
 
 					<div class="fieldcontain ${hasErrors(bean: order.customer, field: 'name', 'error')} required">
-						<label for="name">Customer name<span class="required-indicator">*</span></label>
+						<label >Customer name<span class="required-indicator">*</span></label>
 						<g:textField name="customer.name" required="" value="${order?.customer?.name}"/>
 					</div>
 					<div class="fieldcontain ${hasErrors(bean: order.customer.address, field: 'street', 'error')} required">
-						<label for="name">Customer street<span class="required-indicator">*</span></label>
+						<label >Customer street<span class="required-indicator">*</span></label>
 						<g:textField name="customer.address.street" required="" value="${order?.customer?.address?.street}"/>
 					</div>
 					<div class="fieldcontain ${hasErrors(bean: order.customer.address, field: 'city', 'error')} required">
-						<label for="name">Customer city<span class="required-indicator">*</span></label>
+						<label >Customer city<span class="required-indicator">*</span></label>
 						<g:textField name="customer.address.city" required="" value="${order?.customer?.address?.city}"/>
 					</div>
-                    <div class="fieldcontain ${hasErrors(bean: order.customer, field: 'creditScore', 'error')} required">
-                        <label for="experience">Customer credit score<span class="required-indicator">*</span></label>
-                        <g:select name="customer.creditScore" from="${CreditScore.values()}" required="" value="${order?.customer?.creditScore}"/>
-                    </div>
+                    <div class="fieldcontain ${hasErrors(bean: order, field: 'paymentMethod', 'error')} required">
+                        <label >Payment method<span class="required-indicator">*</span></label>
+                        <g:select name="paymentMethod" from="${PaymentMethod.values()}" required="" value="${order?.paymentMethod}"/>
+					</div>
                     <div class="fieldcontain ${hasErrors(bean: order, field: 'contactPerson', 'error')} required">
-                        <label for="name">Contact person<span class="required-indicator">*</span></label>
+                        <label >Contact person<span class="required-indicator">*</span></label>
                         <g:textField name="contactPerson" required="" value="${order?.contactPerson}"/>
                     </div>
 

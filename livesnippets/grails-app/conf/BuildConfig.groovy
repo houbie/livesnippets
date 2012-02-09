@@ -21,6 +21,9 @@ grails.project.dependency.resolution = {
     }
 
     dependencies {
+        compile('org.quartz-scheduler:quartz:1.8.6') {
+            excludes "slf4j-api", "c3p0", "jta"
+        }
     }
 
     plugins {
@@ -34,7 +37,7 @@ grails.project.dependency.resolution = {
 
         build ":tomcat:$grailsVersion"
         build ':cloud-support:1.0.8'
-        build ':cloud-foundry:1.2'
+        build ':cloud-foundry:1.2.1'
     }
 }
 

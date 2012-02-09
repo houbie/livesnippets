@@ -2,6 +2,11 @@ Just like methods, subflows can define input arguments that will be put in its f
 {groovySrc:class=DeveloperController|from=def developerSelectionFlow|lines=5}
 {groovySrc}
 
+The values can be accessed like any other flow scoped variable:
+{groovySrc:class=DeveloperController|from=if|lines=1}
+{groovySrc}
+
+
 The values are provided in the calling flow:
 {groovySrc:class=ProjectController|from=subflow|lines=2}
 {groovySrc}

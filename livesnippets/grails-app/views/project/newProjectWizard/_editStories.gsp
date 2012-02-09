@@ -8,9 +8,7 @@
         </g:eachError>
     </ul>
 </g:hasErrors>
-%{--<g:form controller="project" action="newProjectWizard">--}%
-<g:formRemote name="userStoryForm" url="[controller: controllerName, action: actionName,
-       params:[ajaxSource: true, _eventId: 'addAjax', execution: params.execution]]" update="editStories">
+<flow:formRemote name="userStoryForm" event="addAjax" update="editStories">
     <fieldset class="form">
 
         <div class="fieldcontain ${hasErrors(bean: userStoryInstance, field: 'name', 'error')} required">
@@ -32,8 +30,7 @@
     <fieldset class="buttons">
         <g:submitButton class="save" name="addAjax" value="Add"/>
     </fieldset>
-</g:formRemote>
-%{--</g:form>--}%
+</flow:formRemote>
 
 
 <div id="list-userStory" class="content scaffold-list" role="main">
@@ -50,8 +47,8 @@
             <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                 <td>${fieldValue(bean: userStory, field: "name")}</td>
                 <td>${fieldValue(bean: userStory, field: "owner")}</td>
-                <td><g:remoteLink update="editStories" controller="${controllerName}" action="${actionName}" event="removeAjax"
-                        params="${[name: userStory.name, ajaxSource: true, execution: params.execution]}">Remove</g:remoteLink></td>
+                <td><flow:remoteLink update="editStories" event="removeAjax"
+                        params="${[name: userStory.name]}">Remove</flow:remoteLink></td>
             </tr>
         </g:each>
         </tbody>

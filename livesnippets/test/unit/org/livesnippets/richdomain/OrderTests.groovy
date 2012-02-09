@@ -1,6 +1,5 @@
-package org.livesnippets.extendedvalidation
+package org.livesnippets.richdomain
 
-import org.livesnippets.extendedvalidation.Customer.CreditScore
 
 class OrderTests extends GroovyTestCase {
 
@@ -17,12 +16,12 @@ class OrderTests extends GroovyTestCase {
         order.orderLines << new OrderLine(product: Product.Apples, quantity: 10)
         order.orderLines << new OrderLine(product: Product.Pears, quantity: 5)
         order.customer.name = 'Ivo Houbrechts'
-        order.customer.creditScore = CreditScore.BAD
+        order.paymentMethod = PaymentMethod.INVOICE
         order.contactPerson = 'Joe'
         assert order.validate(groups: ['invoiceData'], excludes: ['customer.address'])
 
-        assert !order.validate(includes: ['creditCheck', 'orderLines.*'])
-        assert (order.errors.globalErrors.first().codes as List).contains('org.livesnippets.extendedvalidation.Order.creditCheck.BAD')
+        assert !order.validate(includes: ['maxInvoiceQuantity', 'orderLines.*'])
+        assert (order.errors.globalErrors.first().codes as List).contains('org.livesnippets.richdomain.Order.maxInvoiceQuantity')
 
         order.clearErrors()
         order.orderLines*.clearErrors()

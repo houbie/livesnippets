@@ -1,4 +1,4 @@
-<%@ page import="org.livesnippets.extendedvalidation.Customer.CreditScore; org.livesnippets.webflow.Project" %>
+<%@ page import="org.livesnippets.webflow.Project" %>
 <!doctype html>
 <html>
 	<head>
