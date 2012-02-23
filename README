@@ -1,4 +1,4 @@
-For building live snippets, grails-1.4.0.BUILD-SNAPSHOT needs to be installed.
+For building live snippets, grails-2.0.1 needs to be installed.
 Enter following commands:
 cd livesnippets
 grails run-app
