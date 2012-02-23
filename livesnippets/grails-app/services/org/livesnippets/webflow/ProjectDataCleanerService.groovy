@@ -1,9 +1,6 @@
-package webflow
+package org.livesnippets.webflow
 
 import groovy.util.logging.Slf4j
-import org.livesnippets.webflow.Developer
-import org.livesnippets.webflow.Project
-import org.livesnippets.webflow.UserStory
 
 @Slf4j
 class ProjectDataCleanerService {

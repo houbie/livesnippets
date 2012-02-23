@@ -1,4 +1,4 @@
-With the @ValidationGrailsPlugin@ in combination with flow scoped objects, it is possible that validation errors are not
+With the pre Grails 2.0.0 @ValidationGrailsPlugin@ in combination with flow scoped objects, it is possible that validation errors are not
 rendered after serialization/de-serialization of the objects. This is solved in the extended validation plugin by an ASTTransformation
 that is linked to the @Validateable@ annotation. The ASTTransformation adds a serializable error id to the objects for
 error retrieval.

@@ -1,0 +1,10 @@
+Add the @WiredBean@ or @RichDomain@ annotation to your class and use the standard @Inject@ and @Resource@ annotations to mark members that should be auto wired:
+
+{groovySrc:class=CreditCard|from=@|lines=4}
+{groovySrc}
+
+Classes that implement Serializable will be wired again after deserialization. Injected fields should be marked as transient in this case.
+
+{note}
+The @RichDomain@ annotation combines both the @Validateable@ and @WiredBean@ annotations
+{note}

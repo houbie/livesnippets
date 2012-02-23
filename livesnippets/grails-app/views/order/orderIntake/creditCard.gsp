@@ -21,7 +21,7 @@
 				<fieldset class="form">
 
 					<div class="fieldcontain ${hasErrors(bean: order.creditCard, field: 'number', 'error')} required">
-						<label >Creditcard number<span class="required-indicator">*</span></label>
+						<label >Creditcard number (valid number: 5114039417258712)<span class="required-indicator">*</span></label>
 						<g:textField name="creditCard.number" required="" value="${order?.creditCard?.number}"/>
 					</div>
 					<div class="fieldcontain ${hasErrors(bean: order.creditCard, field: 'expirationMonth', 'error')} required">

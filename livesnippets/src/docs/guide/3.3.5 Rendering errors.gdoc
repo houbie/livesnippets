@@ -1,4 +1,4 @@
-After validating an object tree, the validation errors are attached to the individual objects in the tree. Using the
+After validating an object tree, the validation errors are attached to the individual objects in the tree. Using the standard
 @renderErrors@ tag to show the errors of the root object of the tree, will only show field errors for that object.
 Fields with a cascade constraint will have a @cascade.invalid@ error (if the nested object failed to validate).
 

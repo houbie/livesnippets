@@ -44,7 +44,7 @@ class OrderController {
                 } else {
                     RequestContextHolder.currentRequestAttributes().flashScope.newOrder = flow.order
                 }
-            }.to { flow.order.paymentMethod == PaymentMethod.CREDIT_CARD ? "creditCard" : "end" }
+            }.to(selectCreditCardOrEnd)
         }
 
         creditCard {
@@ -61,5 +61,9 @@ class OrderController {
         end {
             redirect(action: "index")
         }
+    }
+
+    private def selectCreditCardOrEnd = {
+        flow.order.paymentMethod == PaymentMethod.CREDIT_CARD ? "creditCard" : "end"
     }
 }

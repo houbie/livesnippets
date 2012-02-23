@@ -1,7 +1,5 @@
 package org.livesnippets.webflow
 
-import webflow.ProjectDataCleanerService
-
 class DeveloperController {
 
     def scaffold = true

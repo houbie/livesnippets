@@ -31,7 +31,7 @@ grails.project.dependency.resolution = {
 
         compile ':resources:1.1.6'
         compile ':jquery:1.7.1'
-        compile(":webflow:$grailsVersion")
+        compile ':webflow:2.0.0'
 
         compile ":hibernate:$grailsVersion"
 

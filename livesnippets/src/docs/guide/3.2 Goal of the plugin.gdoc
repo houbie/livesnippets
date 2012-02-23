@@ -1,4 +1,7 @@
-The extended validation plugin is similar to the build-in @ValidationGrailsPlugin@. It makes declarative constraints possible
+The rich domain plugin makes it easier to build a rich domain model with POGO's by providing
+dependency injection and validation support, features that are out of the box only available for Grails (persistent) domain classes.
+
+The validation part of the plugin is similar to the build-in @ValidationGrailsPlugin@. It makes declarative constraints possible
 for classes that are not grails domain classes.
 
 The extra features of the extended validation plugin are:
@@ -6,4 +9,5 @@ The extra features of the extended validation plugin are:
 * cascaded validation
 * instance validators
 * partial validation
-* errors that survive serialization/de-serialization
+
+Dependency injection support is inserted at compile time with an AST transformation, meaning that no special AOP agents are required.

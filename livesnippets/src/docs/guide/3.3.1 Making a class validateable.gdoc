@@ -1,0 +1,8 @@
+A class can be made validateable by simply annotating it with either @be.ixor.grails.richdomain.validation@ or @ be.ixor.grails.richdomain.RichDomain@
+{groovySrc:class=Address|from=@Validateable|lines=2}
+{groovySrc}
+
+{note}
+The @RichDomain@ annotation combines both the @Validateable@ and @WiredBean@ annotations
+{note}
+

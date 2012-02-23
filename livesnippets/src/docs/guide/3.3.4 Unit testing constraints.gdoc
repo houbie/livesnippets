@@ -1,0 +1,4 @@
+Since validation support is injected at compile time with an AST transformation, constraints can be tested in plain unit tests:
+From then on you can test the constraints as usual:
+{groovySrc:class=OrderTests|from=void|lines=6}
+{groovySrc}

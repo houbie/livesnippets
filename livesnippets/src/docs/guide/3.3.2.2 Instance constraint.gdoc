@@ -2,9 +2,9 @@ Grails @validator@ constraints make it possible to validate a complete object in
 You are however forced to define the validator on one field (you can repeat the validator on multiple fields, but then
 the same error gets displayed multiple times).
 
-An instance constraint does not have to be defined on a field. It only requires a (unique) declarative name:
+An instance constraint does not have to be defined on a field. It only requires a (unique) declarative name (@maxInvoiceQuantity@ in the example):
 
-{groovySrc:class=Order|from=creditCheck}
+{groovySrc:class=Order|from=maxInvoiceQuantity}
 {groovySrc}
 
 If you want to access the error object, just define a second argument in the validator closure:

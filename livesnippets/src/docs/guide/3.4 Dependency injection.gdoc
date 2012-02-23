@@ -1,0 +1,2 @@
+An AST transformation makes sure that auto wiring of dependencies is performed automatically after each constructor call and after deserialization.
+Hence no agents or other Spring AOP stuff is necessary.

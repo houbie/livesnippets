@@ -1,0 +1,28 @@
+All objects are wired when running integration and functional tests.
+
+Since Grails 2.0.0, unit tests that use a test mixin, have a mock application context. In this case all the @WiredBean@s
+will be auto-wired. If your test does not define the required dependencies in a @defineBeans@ block, you will get an error.
+Auto-wiring can be prevented by using a dummy @AutoWireBeanListener@:
+
+{src}
+ApplicationContextUtils.autoWireBeanListener = {bean ->} as AutoWireBeanListener
+{src}
+
+In unit tests prior to Grails 2.0.0, there is typical no application context and hence no wiring. In this case the test will normally inject the necessary
+dependencies by calling setters, but it remains possible to auto-wire beans by using an @AutoWireBeanListener@:
+
+{src}
+ApplicationContextUtils.autoWireBeanListener = {bean ->
+    if (bean instanceof CreditCard) {
+        bean.creditCardService = new CreditCardServiceMock()
+    }
+} as AutoWireBeanListener
+{src}
+
+But don't forget to reset the listener, otherwise following tests may fail:
+{src}
+@After
+void clearAutoWireBeanListener() {
+    ApplicationContextUtils.autoWireBeanListener = null
+}
+{src}

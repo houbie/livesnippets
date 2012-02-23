@@ -1,5 +1,5 @@
 The "rich domain demo application":../../order contains a simple domain model for representing customer orders.
-A order has a customer and multiple order lines. Each order line contains a product and a delivery address.
+An order has a customer and multiple order lines. Each order line contains a product and a delivery address.
 
 !orderClassDiagram.png!
 
@@ -7,9 +7,10 @@ A wizard leads the user through the creation of a new order.
 
 !orderIntakeFlow.png!
 
-The application demonstrates the use of validation in combination with webflow for:
+The application demonstrates how to achieve dependency injection for POGO's (plain old groovy objects).
+
+Furthermore it shows the use of validation for POGO's in combination with webflow for:
 * constraint groups
 * cascaded validation
 * instance validators
 * partial validation
-Furthermore dependency injection for POGO's is demonstrated.
