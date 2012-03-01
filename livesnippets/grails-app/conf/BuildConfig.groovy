@@ -27,17 +27,18 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
+        compile ':webflow:2.0.0'
         compile ':rich-domain:1.0.5'
-
+        compile ':gsp-taglib:0.4'
         compile ':resources:1.1.6'
         compile ':jquery:1.7.1'
-        compile ':webflow:2.0.0'
-
         compile ":hibernate:$grailsVersion"
 
         build ":tomcat:$grailsVersion"
         build ':cloud-support:1.0.8'
-        build ':cloud-foundry:1.2.1'
+        build (':cloud-foundry:1.2.1') {
+            excludes 'cloud-support'
+        }
     }
 }
 
