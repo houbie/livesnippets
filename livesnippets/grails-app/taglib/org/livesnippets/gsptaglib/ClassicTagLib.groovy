@@ -11,7 +11,7 @@ class ClassicTagLib {
      * @attr caption OPTIONAL image caption
      * @attr captionKey OPTIONAL i18n key for the image caption
      */
-    def imagePopUp = { attrs, body ->
+    Closure imagePopUp = { attrs, body ->
         def caption= attrs.captionKey? g.message(code: attrs.captionKey) : attrs.caption
         out << '<a class="thumb" href="#thumb">'
         out << g.img(dir: "images", file: "${attrs.image}_thumb.jpg", width: "100px", height: "75px")

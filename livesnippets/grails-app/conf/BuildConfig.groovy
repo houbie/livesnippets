@@ -6,6 +6,8 @@ grails.project.target.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 grails.project.docs.output.dir = "web-app/docs"
 
+gsptaglib.addRequiredAsserts = true
+
 grails.project.dependency.resolution = {
     inherits("global")
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
@@ -29,7 +31,7 @@ grails.project.dependency.resolution = {
     plugins {
         compile ':webflow:2.0.0'
         compile ':rich-domain:1.0.5'
-        compile ':gsp-taglib:0.4'
+        compile ':gsp-taglib:0.5'
         compile ':resources:1.1.6'
         compile ':jquery:1.7.1'
         compile ":hibernate:$grailsVersion"
@@ -43,3 +45,4 @@ grails.project.dependency.resolution = {
 }
 
 grails.plugin.location.'docs' = "../docs"
+//grails.plugin.location.'gsp-taglig' = "../../gsp-taglib"

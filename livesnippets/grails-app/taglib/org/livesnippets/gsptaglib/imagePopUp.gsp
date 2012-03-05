@@ -1,12 +1,13 @@
 <%@ page namespace="widget" %>
-<%--/**
-     * Example widget that shows a hoverable image thumbnail
-     * GSP taglib implementation
-     *
-     * @attr image REQUIRED the name of the image
-     * @attr caption OPTIONAL image caption
-     * @attr captionKey OPTIONAL i18n key for the image caption
-     */--%>
+<%@ page docs="
+Example widget that shows a hoverable image thumbnail
+GSP taglib implementation
+
+@attr image REQUIRED the name of the image
+@attr caption OPTIONAL image caption
+@attr captionKey OPTIONAL i18n key for the image caption
+" %>
+
 <%
     def caption = attrs.captionKey ? g.message(code: attrs.captionKey) : attrs.caption
 %>

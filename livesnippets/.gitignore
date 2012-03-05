@@ -5,3 +5,4 @@ target
 .idea
 out
 *.db
+*GspTagLib.groovy

@@ -1,15 +1,11 @@
 package org.livesnippets.gsptaglib
 // Generated code, DO NOT EDIT!
 
+import org.codehaus.groovy.grails.web.taglib.*
 
 class _CollapsablePanelGspTagLib {
 static namespace = "t"
-/**
-     * A collapsable panel example
-     *
-     * @attr collapsed OPTIONAL the initial state of the panel, default is false
-     */
-def collapsablePanel = { attrs, body ->
+Closure collapsablePanel = { attrs, body ->
 out.print('\n\n')
 
 boolean collapsed = Boolean.valueOf(attrs.collapsed)

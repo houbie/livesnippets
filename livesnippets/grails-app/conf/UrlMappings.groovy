@@ -8,6 +8,7 @@ class UrlMappings {
         }
 
         "/gallery"(view: "/gsptaglib/gallery")
+        "/tagInjection"(view: "/gsptaglib/tagInjection")
 
         "/"(view: "/index")
         "500"(view: '/error')
